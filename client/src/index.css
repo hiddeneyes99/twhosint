@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Oxanium:wght@200;300;400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Cyberpunk Palette - Neon Green & Dark */
+  --background: 240 10% 3.9%;
+  --foreground: 142 70% 50%; /* Neon Green */
+  
+  --card: 240 10% 3.9%;
+  --card-foreground: 142 70% 50%;
+  
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 142 70% 50%;
+  
+  --primary: 142 70% 50%; /* Neon Green */
+  --primary-foreground: 144 100% 5%; /* Very dark green/black */
+  
+  --secondary: 240 5% 15%; /* Dark Gray */
+  --secondary-foreground: 0 0% 98%;
+  
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  
+  --destructive: 0 100% 50%; /* Bright Red */
+  --destructive-foreground: 0 0% 100%;
+  
+  --border: 142 70% 50%; /* Green Borders */
+  --input: 240 3.7% 15.9%;
+  --ring: 142 70% 50%;
+  
+  --radius: 0px; /* Sharp corners for cyberpunk feel */
+
+  /* Custom Font Variables */
+  --font-mono: 'Fira Code', monospace;
+  --font-display: 'Oxanium', sans-serif;
+  --font-body: 'Space Mono', monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
+    font-family: var(--font-body);
+    background-image: 
+      linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply uppercase tracking-wider text-primary font-bold;
+    text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+  }
+
+  .container {
+    @apply px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #000; 
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary)); 
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.8); 
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+  
+  .border-glow {
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.5), inset 0 0 5px hsl(var(--primary) / 0.2);
+  }
+
+  .scanline {
+    display: none;
+  }
+}

@@ -1,0 +1,57 @@
+modules = ["nodejs-20", "web", "postgresql-16"]
+run = "npm run dev"
+hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
+
+[nix]
+channel = "stable-25_05"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[env]
+PORT = "5000"
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["node", "./dist/index.cjs"]
+build = ["npm", "run", "build"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+waitForPort = 5000
+
+[agent]
+integrations = ["javascript_log_in_with_replit:2.0.0"]
+expertMode = true
+
+[userenv]
+
+[userenv.shared]
+"DATABASE_URL=" = "postgresql://postgres.vytalqidugybpybcnzbk:NswtD6HN9Ysl9Ny8@aws-1-ap-south-1.pooler.supabase.com:6543/postgres"
+ADMIN_SECRET_ID = "Wearetechnicalwhite4499"
+ADMIN_SECRET_PASS = "Qw12DL@8100204731"
+AADHAR_API_URL = "MOCK_AADHAR_API"
+IP_API_URL = "http://ip-api.com/json/{query}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query"
+MOBILE_API_URL = "https://numinfosource.alphaapi.workers.dev/?key=anshapi&mobile={query}"
+VEHICLE_API_URL = "https://vehicle-infoo.vercel.app/?rc_number={query}"
