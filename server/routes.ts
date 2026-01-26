@@ -221,8 +221,17 @@ export async function registerRoutes(
   });
 
   app.get(api.user.history.path, requireAuth, async (req: any, res) => {
-    const history = await storage.getRequestHistory(req.user.id);
-    res.json(history);
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = Math.min(parseInt(req.query.limit as string) || 20, 100); // Max 100 per request
+    const offset = (page - 1) * limit;
+    
+    const history = await storage.getRequestHistory(req.user.id, limit, offset);
+    res.json({
+      data: history,
+      page,
+      limit,
+      hasMore: history.length === limit // If we got full limit, there might be more
+    });
   });
 
   app.post("/api/user/redeem", requireAuth, async (req: any, res) => {

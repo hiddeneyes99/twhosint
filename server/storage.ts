@@ -9,7 +9,7 @@ export interface IStorage {
   updateUser(id: string, updates: Partial<User>): Promise<User>;
   deductCredit(userId: string): Promise<User>;
   logRequest(userId: string, service: string, query: string, status: string, result?: any): Promise<void>;
-  getRequestHistory(userId: string): Promise<RequestLog[]>;
+  getRequestHistory(userId: string, limit?: number, offset?: number): Promise<RequestLog[]>;
   isIpBlocked(ip: string): Promise<boolean>;
   blockIp(ip: string, blocked: boolean): Promise<void>;
   
@@ -69,12 +69,14 @@ export class DatabaseStorage implements IStorage {
     });
   }
 
-  async getRequestHistory(userId: string): Promise<RequestLog[]> {
+  async getRequestHistory(userId: string, limit: number = 20, offset: number = 0): Promise<RequestLog[]> {
     return await db
       .select()
       .from(requestLogs)
       .where(eq(requestLogs.userId, userId))
-      .orderBy(sql`${requestLogs.createdAt} DESC`);
+      .orderBy(sql`${requestLogs.createdAt} DESC`)
+      .limit(limit)
+      .offset(offset);
   }
 
   async isIpBlocked(ip: string): Promise<boolean> {
