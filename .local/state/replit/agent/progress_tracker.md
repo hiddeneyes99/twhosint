@@ -23,3 +23,9 @@
 [x] 23. Re-installed tsx dependency and verified application running on port 5000
 [x] 24. Re-installed npm dependencies and verified application running on port 5000 after environment migration
 [x] 25. Fixed mobile number API data formatting - now automatically detects multiple API response formats and displays nicely formatted data instead of raw JSON
+[x] 26. Implemented Infinite Scroll for History section (YouTube/Instagram style):
+    - Backend: Updated storage.ts with limit/offset pagination
+    - Backend: Updated routes.ts to accept ?page=X&limit=Y query params
+    - Frontend: Added IntersectionObserver for scroll detection
+    - Frontend: Appends new data instead of replacing (prevData + newData)
+    - Frontend: Shows loading indicator at bottom, stops when no more data
