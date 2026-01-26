@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion, AnimatePresence } from "framer-motion";
+import { Loader2 } from "lucide-react";
 import {
   Smartphone,
   CreditCard,
@@ -67,6 +68,15 @@ export default function Dashboard() {
   const [protectionReason, setProtectionReason] = useState<string | null>(null);
   const [showLowCreditAlert, setShowLowCreditAlert] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  
+  // Infinite scroll state for history
+  const [historyData, setHistoryData] = useState<any[]>([]);
+  const [historyPage, setHistoryPage] = useState(1);
+  const [hasMoreHistory, setHasMoreHistory] = useState(true);
+  const [isFetchingHistory, setIsFetchingHistory] = useState(false);
+  const [isInitialHistoryLoad, setIsInitialHistoryLoad] = useState(true);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
+  const HISTORY_LIMIT = 20;
 
   useEffect(() => {
     (window as any).openRedeemModal = () => setIsRedeemModalOpen(true);
@@ -75,11 +85,81 @@ export default function Dashboard() {
     };
   }, []);
 
-  const { data: history = [] } = useQuery<any[]>({
-    queryKey: ["/api/user/history"],
-    enabled: isAuthenticated,
-    refetchInterval: 5000, // Added polling to ensure history loads
-  });
+  // Fetch history with pagination
+  const fetchHistory = useCallback(async (page: number, reset: boolean = false) => {
+    if (isFetchingHistory || !isAuthenticated) return;
+    
+    setIsFetchingHistory(true);
+    try {
+      const token = (window as any).firebaseToken;
+      const response = await fetch(`/api/user/history?page=${page}&limit=${HISTORY_LIMIT}`, {
+        headers: {
+          ...(token ? { "Authorization": `Bearer ${token}` } : {}),
+        },
+        credentials: "include",
+      });
+      
+      if (!response.ok) throw new Error("Failed to fetch history");
+      
+      const result = await response.json();
+      const newData = result.data || [];
+      
+      if (reset) {
+        setHistoryData(newData);
+        setHistoryPage(1);
+      } else {
+        setHistoryData(prev => [...prev, ...newData]);
+      }
+      
+      setHasMoreHistory(result.hasMore);
+      setIsInitialHistoryLoad(false);
+    } catch (error) {
+      console.error("Error fetching history:", error);
+    } finally {
+      setIsFetchingHistory(false);
+    }
+  }, [isAuthenticated, isFetchingHistory]);
+
+  // Initial load when authenticated
+  useEffect(() => {
+    if (isAuthenticated && isInitialHistoryLoad) {
+      fetchHistory(1, true);
+    }
+  }, [isAuthenticated, isInitialHistoryLoad, fetchHistory]);
+
+  // Load more when scrolling to bottom
+  const loadMoreHistory = useCallback(() => {
+    if (hasMoreHistory && !isFetchingHistory) {
+      const nextPage = historyPage + 1;
+      setHistoryPage(nextPage);
+      fetchHistory(nextPage, false);
+    }
+  }, [hasMoreHistory, isFetchingHistory, historyPage, fetchHistory]);
+
+  // IntersectionObserver for infinite scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMoreHistory && !isFetchingHistory) {
+          loadMoreHistory();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasMoreHistory, isFetchingHistory, loadMoreHistory]);
+
+  // Refresh history when a new search is made
+  const refreshHistory = useCallback(() => {
+    setHistoryPage(1);
+    setHasMoreHistory(true);
+    fetchHistory(1, true);
+  }, [fetchHistory]);
 
   // Service Mutations
   const mobileMutation = useMobileInfo();
@@ -87,7 +167,7 @@ export default function Dashboard() {
   const vehicleMutation = useVehicleInfo();
   const ipMutation = useIpInfo();
 
-  // Watch for successful mutations and check credits
+  // Watch for successful mutations and check credits + refresh history
   useEffect(() => {
     const mutations = [
       mobileMutation,
@@ -101,6 +181,11 @@ export default function Dashboard() {
     if ((anySuccess || anyError) && user && user.credits < 10) {
       setShowLowCreditAlert(true);
     }
+    
+    // Refresh history when a search succeeds
+    if (anySuccess) {
+      refreshHistory();
+    }
   }, [
     mobileMutation.isSuccess,
     aadharMutation.isSuccess,
@@ -111,6 +196,7 @@ export default function Dashboard() {
     vehicleMutation.isError,
     ipMutation.isError,
     user?.credits,
+    refreshHistory,
   ]);
 
   // Initial check for 0 credits
@@ -908,36 +994,58 @@ export default function Dashboard() {
 
                     <ScrollArea className="h-[350px] md:h-[400px] pr-2 md:pr-4">
                       <div className="space-y-3 md:space-y-4">
-                        {history.length === 0 ? (
+                        {isInitialHistoryLoad && isFetchingHistory ? (
+                          <div className="flex flex-col items-center justify-center py-8">
+                            <Loader2 className="w-6 h-6 text-primary animate-spin mb-2" />
+                            <p className="text-muted-foreground font-mono text-xs">LOADING LOGS...</p>
+                          </div>
+                        ) : historyData.length === 0 ? (
                           <p className="text-center text-muted-foreground font-mono text-xs md:text-sm">
                             NO LOGS FOUND
                           </p>
                         ) : (
-                          history.map((log: any) => (
-                            <div
-                              key={log.id}
-                              className="border border-primary/20 p-3 md:p-4 bg-primary/5 hover:bg-primary/10 transition-colors"
-                            >
-                              <div className="flex flex-col sm:flex-row justify-between items-start gap-1 mb-2">
-                                <span className="text-primary font-bold uppercase text-[10px] md:text-sm">
-                                  {log.service} MODULE
-                                </span>
-                                <span className="text-[9px] md:text-xs text-muted-foreground font-mono">
-                                  {new Date(log.createdAt).toLocaleString()}
-                                </span>
+                          <>
+                            {historyData.map((log: any) => (
+                              <div
+                                key={log.id}
+                                className="border border-primary/20 p-3 md:p-4 bg-primary/5 hover:bg-primary/10 transition-colors"
+                                data-testid={`history-log-${log.id}`}
+                              >
+                                <div className="flex flex-col sm:flex-row justify-between items-start gap-1 mb-2">
+                                  <span className="text-primary font-bold uppercase text-[10px] md:text-sm">
+                                    {log.service} MODULE
+                                  </span>
+                                  <span className="text-[9px] md:text-xs text-muted-foreground font-mono">
+                                    {new Date(log.createdAt).toLocaleString()}
+                                  </span>
+                                </div>
+                                <p className="font-mono text-[10px] md:text-sm text-primary/80 mb-3 md:mb-4 tracking-tight break-all">
+                                  QUERY: {log.query}
+                                </p>
+                                {log.result && (
+                                  <TerminalOutput
+                                    data={log.result}
+                                    title="HISTORICAL DATA DUMP"
+                                    className="h-auto border-primary/10"
+                                  />
+                                )}
                               </div>
-                              <p className="font-mono text-[10px] md:text-sm text-primary/80 mb-3 md:mb-4 tracking-tight break-all">
-                                QUERY: {log.query}
-                              </p>
-                              {log.result && (
-                                <TerminalOutput
-                                  data={log.result}
-                                  title="HISTORICAL DATA DUMP"
-                                  className="h-auto border-primary/10"
-                                />
+                            ))}
+                            
+                            {/* Infinite scroll trigger element */}
+                            <div ref={loadMoreRef} className="py-4 flex justify-center">
+                              {isFetchingHistory ? (
+                                <div className="flex items-center gap-2 text-primary">
+                                  <Loader2 className="w-4 h-4 animate-spin" />
+                                  <span className="font-mono text-xs">LOADING MORE...</span>
+                                </div>
+                              ) : hasMoreHistory ? (
+                                <span className="font-mono text-xs text-muted-foreground">SCROLL FOR MORE</span>
+                              ) : (
+                                <span className="font-mono text-xs text-muted-foreground">END OF LOGS</span>
                               )}
                             </div>
-                          ))
+                          </>
                         )}
                       </div>
                     </ScrollArea>
