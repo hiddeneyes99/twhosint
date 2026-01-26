@@ -74,10 +74,27 @@ export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoa
               const lon = data.longitude || data.lon;
     const isLocationField = key.toLowerCase().includes('lat') || key.toLowerCase().includes('lon');
 
-    // Special formatting for Mobile Info results
-    const isMobileResult = (data.query?.type === 'mobile_lookup' || data.source?.type === 'mobile') && key === 'result' && Array.isArray(value);
+    // Special formatting for Mobile Info results - detect multiple API formats
+    // Check various conditions to identify mobile result data
+    const hasMobileFields = (item: any) => {
+      if (!item || typeof item !== 'object') return false;
+      const mobileFieldIndicators = ['name', 'mobile', 'address', 'father_name', 'id_number', 'circle', 'alt_mobile'];
+      const matchCount = mobileFieldIndicators.filter(field => field in item).length;
+      return matchCount >= 2; // If at least 2 mobile-specific fields exist
+    };
+
+    // Multiple detection methods for mobile results
+    const isExplicitMobileType = data.query?.type === 'mobile_lookup' || data.source?.type === 'mobile';
+    const isResultArrayWithMobileData = key === 'result' && Array.isArray(value) && value.length > 0 && hasMobileFields(value[0]);
+    const isDataArrayWithMobileData = key === 'data' && Array.isArray(value) && value.length > 0 && hasMobileFields(value[0]);
+    const isDirectMobileData = Array.isArray(value) && value.length > 0 && hasMobileFields(value[0]) && !['history', 'logs', 'users'].includes(key);
     
-    if (isMobileResult) {
+    const isMobileResult = isExplicitMobileType && (key === 'result' || key === 'data') && Array.isArray(value) || 
+                           isResultArrayWithMobileData || 
+                           isDataArrayWithMobileData ||
+                           (isDirectMobileData && (key === 'result' || key === 'data' || key === 'records' || key === 'items'));
+    
+    if (isMobileResult && Array.isArray(value)) {
       return (
         <div key={key} className="space-y-4 font-mono text-sm">
           {value.map((item: any, index: number) => (
@@ -145,9 +162,14 @@ export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoa
       );
     }
     
-    // Hide metadata fields if specialized view is active
-    const isMetadata = key === 'query' || key === 'success' || key === 'status_code' || key === 'result_count' || key === 'timestamp' || key === 'credit' || key === 'dev' || key === 'source' || key === 'usage';
-    if ((data.query?.type === 'mobile_lookup' || data.source?.type === 'mobile') && isMetadata) {
+    // Hide metadata fields if specialized view is active (mobile data detected)
+    const hasAnyMobileData = Object.entries(data).some(([k, v]) => {
+      if (!Array.isArray(v) || v.length === 0) return false;
+      return hasMobileFields(v[0]);
+    });
+    const isSpecializedMobileView = data.query?.type === 'mobile_lookup' || data.source?.type === 'mobile' || hasAnyMobileData;
+    const isMetadata = key === 'query' || key === 'success' || key === 'status_code' || key === 'result_count' || key === 'timestamp' || key === 'credit' || key === 'dev' || key === 'source' || key === 'usage' || key === 'status' || key === 'message' || key === 'count' || key === 'total';
+    if (isSpecializedMobileView && isMetadata) {
       return null;
     }
 
