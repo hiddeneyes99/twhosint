@@ -37,3 +37,13 @@
     - Both user dashboard and admin panel now use this optimized approach
 [x] 29. Re-installed npm dependencies and verified application running after environment migration
 [x] 30. Re-installed npm dependencies and verified application running on port 5000 after latest environment migration (2026-01-27)
+[x] 31. Added Credit Settings feature from old version:
+    - Created app_settings table with freeCreditsOnSignup and serviceCosts
+    - Added getSettings() and updateSettings() to storage
+    - Updated deductCredit to accept dynamic amount
+    - Added /api/admin/settings GET and POST routes
+    - Updated handleServiceRequest to use dynamic service costs
+    - Updated firebase-auth to use dynamic signup credits
+    - Added Settings modal in Admin Panel with:
+      - Free Signup Credits configuration
+      - Service costs for mobile, vehicle, IP, aadhar searches
