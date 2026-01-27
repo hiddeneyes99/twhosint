@@ -27,6 +27,7 @@ export async function registerRoutes(
   ) => {
     try {
       const user = await storage.getUser(req.user.id);
+      const settings = await storage.getSettings();
 
       if (!user) {
         return res.status(401).json({ message: "User not found" });
@@ -48,7 +49,10 @@ export async function registerRoutes(
         });
       }
 
-      if (user.credits < 1) {
+      const serviceCosts = settings.serviceCosts as Record<string, number>;
+      const cost = serviceCosts[serviceName] ?? 1;
+
+      if (user.credits < cost) {
         await storage.logRequest(
           user.id,
           serviceName,
@@ -76,7 +80,7 @@ export async function registerRoutes(
       }
 
       // Deduct credit and log request
-      const updatedUser = await storage.deductCredit(user.id);
+      const updatedUser = await storage.deductCredit(user.id, cost);
       await storage.logRequest(user.id, serviceName, query, "SUCCESS", data);
 
       res.json({
@@ -353,6 +357,16 @@ export async function registerRoutes(
   app.get("/api/broadcast/active", async (req, res) => {
     const broadcast = await storage.getActiveBroadcast();
     res.json(broadcast || null);
+  });
+
+  app.get("/api/admin/settings", requireAdminSession, async (req, res) => {
+    const settings = await storage.getSettings();
+    res.json(settings);
+  });
+
+  app.post("/api/admin/settings", requireAdminSession, async (req, res) => {
+    const settings = await storage.updateSettings(req.body);
+    res.json(settings);
   });
 
   return httpServer;

@@ -1,4 +1,4 @@
-import { users, requestLogs, protectedNumbers, redeemCodes, broadcastMessages, type User, type UpsertUser, type RequestLog, type RedeemCode, type BroadcastMessage } from "@shared/schema";
+import { users, requestLogs, protectedNumbers, redeemCodes, broadcastMessages, appSettings, type User, type UpsertUser, type RequestLog, type RedeemCode, type BroadcastMessage, type AppSettings } from "@shared/schema";
 import { db } from "./db";
 import { eq, sql, inArray, and, gt, lt, or, isNull } from "drizzle-orm";
 
@@ -29,6 +29,10 @@ export interface IStorage {
   addProtectedNumber(number: string, reason?: string): Promise<void>;
   removeProtectedNumber(number: string): Promise<void>;
   getProtectedNumbers(): Promise<string[]>;
+  
+  // Settings methods
+  getSettings(): Promise<AppSettings>;
+  updateSettings(settings: Partial<AppSettings>): Promise<AppSettings>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -55,10 +59,10 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
-  async deductCredit(userId: string): Promise<User> {
+  async deductCredit(userId: string, amount: number = 1): Promise<User> {
     const [user] = await db
       .update(users)
-      .set({ credits: sql`${users.credits} - 1` })
+      .set({ credits: sql`${users.credits} - ${amount}` })
       .where(eq(users.id, userId))
       .returning();
     return user;
@@ -182,6 +186,32 @@ export class DatabaseStorage implements IStorage {
   async getProtectedNumbers(): Promise<string[]> {
     const results = await db.select({ number: protectedNumbers.number }).from(protectedNumbers);
     return results.map(r => r.number);
+  }
+
+  async getSettings(): Promise<AppSettings> {
+    const [settings] = await db.select().from(appSettings).limit(1);
+    if (!settings) {
+      const [newSettings] = await db.insert(appSettings).values({
+        freeCreditsOnSignup: 10,
+        serviceCosts: {
+          mobile: 1,
+          vehicle: 1,
+          ip: 1,
+          aadhar: 1
+        },
+      }).returning();
+      return newSettings;
+    }
+    return settings;
+  }
+
+  async updateSettings(updates: Partial<AppSettings>): Promise<AppSettings> {
+    const settings = await this.getSettings();
+    const [updated] = await db.update(appSettings)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(appSettings.id, settings.id))
+      .returning();
+    return updated;
   }
 }
 

@@ -49,6 +49,18 @@ export const redeemCodes = pgTable("redeem_codes", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const appSettings = pgTable("app_settings", {
+  id: serial("id").primaryKey(),
+  freeCreditsOnSignup: integer("free_credits_on_signup").notNull().default(10),
+  serviceCosts: jsonb("service_costs").notNull().default({
+    mobile: 1,
+    vehicle: 1,
+    ip: 1,
+    aadhar: 1
+  }),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 // === SCHEMAS ===
 export const insertRequestLogSchema = createInsertSchema(requestLogs).omit({ 
   id: true, 
@@ -74,10 +86,16 @@ export const insertBroadcastMessageSchema = createInsertSchema(broadcastMessages
   isActive: true
 });
 
+export const insertAppSettingsSchema = createInsertSchema(appSettings).omit({
+  id: true,
+  updatedAt: true
+});
+
 // === TYPES ===
 export type RequestLog = typeof requestLogs.$inferSelect;
 export type RedeemCode = typeof redeemCodes.$inferSelect;
 export type BroadcastMessage = typeof broadcastMessages.$inferSelect;
+export type AppSettings = typeof appSettings.$inferSelect;
 
 // Service Request Schemas
 export const mobileInfoSchema = z.object({

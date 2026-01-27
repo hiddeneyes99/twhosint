@@ -16,7 +16,8 @@ import {
   Lock,
   ShieldAlert,
   Loader2,
-  Megaphone
+  Megaphone,
+  Settings
 } from "lucide-react";
 import { useLocation } from "wouter";
 import { useState, useEffect, useRef, useCallback } from "react";
@@ -24,7 +25,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import type { User, RequestLog, BroadcastMessage } from "@shared/schema";
+import type { User, RequestLog, BroadcastMessage, AppSettings } from "@shared/schema";
 import { motion, AnimatePresence } from "framer-motion";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -61,6 +62,28 @@ export default function AdminLogin() {
   });
   const [generatedCode, setGeneratedCode] = useState<string | null>(null);
   const [selectedLog, setSelectedLog] = useState<RequestLog | null>(null);
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+
+  const { data: settings, refetch: refetchSettings } = useQuery<AppSettings>({
+    queryKey: ["/api/admin/settings"],
+    enabled: isLoggedIn,
+  });
+
+  const updateSettingsMutation = useMutation({
+    mutationFn: async (newSettings: Partial<AppSettings>) => {
+      const res = await fetch("/api/admin/settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newSettings),
+      });
+      if (!res.ok) throw new Error("Failed to update settings");
+      return res.json();
+    },
+    onSuccess: () => {
+      refetchSettings();
+      toast({ title: "SETTINGS UPDATED", description: "Global configuration synchronized." });
+    },
+  });
 
   const { data: activeBroadcast, refetch: refetchBroadcast } = useQuery<BroadcastMessage | null>({
     queryKey: ["/api/broadcast/active"],
@@ -532,7 +555,71 @@ export default function AdminLogin() {
               <div className="text-2xl font-bold">{activeBroadcast ? "ACTIVE" : "OFFLINE"}</div>
             </CardContent>
           </Card>
+          <Card 
+            className="bg-zinc-950 border-primary/20 hover:border-primary/40 transition-colors cursor-pointer"
+            onClick={() => setIsSettingsModalOpen(true)}
+          >
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-bold flex items-center gap-2">
+                <Settings className="w-4 h-4" /> APP_SETTINGS
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">CONFIG</div>
+            </CardContent>
+          </Card>
         </div>
+
+        <Dialog open={isSettingsModalOpen} onOpenChange={setIsSettingsModalOpen}>
+          <DialogContent className="bg-zinc-950 border-primary/20 text-primary font-mono max-w-md">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2 uppercase tracking-widest text-primary">
+                <Settings className="w-5 h-5" />
+                GLOBAL_SETTINGS_CONFIG
+              </DialogTitle>
+              <DialogDescription className="text-primary/40 uppercase text-[10px] tracking-widest">
+                CONFIGURE FREE CREDITS AND SEARCH COSTS
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-6 mt-4">
+              <div className="space-y-4 border border-primary/10 p-4 bg-black/50">
+                <div className="space-y-1">
+                  <label className="text-[10px] uppercase text-primary/40">Free Signup Credits</label>
+                  <Input 
+                    type="number"
+                    defaultValue={settings?.freeCreditsOnSignup}
+                    key={settings?.freeCreditsOnSignup}
+                    onBlur={(e) => updateSettingsMutation.mutate({ freeCreditsOnSignup: parseInt(e.target.value) || 0 })}
+                    className="bg-black/50 border-primary/20 font-mono text-primary h-8"
+                    data-testid="input-signup-credits"
+                  />
+                </div>
+                
+                <div className="pt-2 border-t border-primary/10">
+                  <h4 className="text-[10px] font-bold uppercase tracking-widest text-primary/60 mb-3">Service Costs (Credits per Search)</h4>
+                  <div className="space-y-3">
+                    {['mobile', 'vehicle', 'ip', 'aadhar'].map((service) => (
+                      <div key={service} className="space-y-1">
+                        <label className="text-[10px] uppercase text-primary/40">{service} Search Cost</label>
+                        <Input 
+                          type="number"
+                          defaultValue={(settings?.serviceCosts as Record<string, number>)?.[service] || 1}
+                          key={(settings?.serviceCosts as Record<string, number>)?.[service]}
+                          onBlur={(e) => {
+                            const newCosts = { ...(settings?.serviceCosts as Record<string, number>), [service]: parseInt(e.target.value) || 0 };
+                            updateSettingsMutation.mutate({ serviceCosts: newCosts });
+                          }}
+                          className="bg-black/50 border-primary/20 font-mono text-primary h-8"
+                          data-testid={`input-cost-${service}`}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
 
         <Dialog open={isBroadcastModalOpen} onOpenChange={setIsBroadcastModalOpen}>
           <DialogContent className="bg-zinc-950 border-primary/20 text-primary font-mono max-w-2xl overflow-y-auto max-h-[90vh]">

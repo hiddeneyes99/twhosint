@@ -48,11 +48,12 @@ export const firebaseAuthMiddleware = async (req: any, res: Response, next: Next
 
       if (!user) {
         console.log("Creating new user in storage:", decodedToken.uid);
+        const settings = await storage.getSettings();
         user = await storage.createUser({
           id: decodedToken.uid,
           email: decodedToken.email,
           username: decodedToken.email?.split('@')[0] || 'user',
-          credits: 10,
+          credits: settings.freeCreditsOnSignup,
           lastIp: ipStr,
           termsAccepted: req.headers['x-terms-accepted'] === 'true',
           privacyAccepted: req.headers['x-privacy-accepted'] === 'true',
