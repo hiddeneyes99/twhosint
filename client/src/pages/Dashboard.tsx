@@ -68,6 +68,7 @@ export default function Dashboard() {
   const [showProtectedAlert, setShowProtectedAlert] = useState(false);
   const [protectionReason, setProtectionReason] = useState<string | null>(null);
   const [showLowCreditAlert, setShowLowCreditAlert] = useState(false);
+  const [hasDismissedLowCreditAlert, setHasDismissedLowCreditAlert] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [selectedHistoryLog, setSelectedHistoryLog] = useState<any>(null);
   
@@ -173,7 +174,7 @@ export default function Dashboard() {
     const anySuccess = mutations.some((m) => m.isSuccess);
     const anyError = mutations.some((m) => m.isError);
 
-    if ((anySuccess || anyError) && user && user.credits < 10) {
+    if ((anySuccess || anyError) && user && user.credits < 10 && !hasDismissedLowCreditAlert) {
       setShowLowCreditAlert(true);
     }
     
@@ -196,10 +197,10 @@ export default function Dashboard() {
 
   // Initial check for 0 credits
   useEffect(() => {
-    if (user && user.credits === 0) {
+    if (user && user.credits === 0 && !hasDismissedLowCreditAlert) {
       setShowLowCreditAlert(true);
     }
-  }, [user?.credits]);
+  }, [user?.credits, hasDismissedLowCreditAlert]);
 
   // Watch for protected number errors
   useEffect(() => {
@@ -502,7 +503,13 @@ export default function Dashboard() {
         )}
       </AnimatePresence>
 
-      <Dialog open={showLowCreditAlert} onOpenChange={setShowLowCreditAlert}>
+      <Dialog 
+        open={showLowCreditAlert} 
+        onOpenChange={(open) => {
+          setShowLowCreditAlert(open);
+          if (!open) setHasDismissedLowCreditAlert(true);
+        }}
+      >
         <DialogContent className="bg-black border-primary/50 text-white font-mono max-w-sm">
           <DialogHeader>
             <DialogTitle className="text-primary flex items-center gap-2 text-lg">
@@ -519,7 +526,10 @@ export default function Dashboard() {
             <CyberButton
               variant="outline"
               className="w-full sm:flex-1 h-9"
-              onClick={() => setShowLowCreditAlert(false)}
+              onClick={() => {
+                setShowLowCreditAlert(false);
+                setHasDismissedLowCreditAlert(true);
+              }}
             >
               CONTINUE
             </CyberButton>
@@ -528,6 +538,7 @@ export default function Dashboard() {
               className="w-full sm:flex-1 h-9 shadow-[0_0_10px_rgba(0,255,0,0.3)]"
               onClick={() => {
                 setShowLowCreditAlert(false);
+                setHasDismissedLowCreditAlert(true);
                 setIsRedeemModalOpen(true);
               }}
             >
