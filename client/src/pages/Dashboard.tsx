@@ -77,6 +77,7 @@ export default function Dashboard() {
   const [isFetchingHistory, setIsFetchingHistory] = useState(false);
   const [isInitialHistoryLoad, setIsInitialHistoryLoad] = useState(true);
   const loadMoreRef = useRef<HTMLDivElement>(null);
+  const historyScrollRef = useRef<HTMLDivElement>(null);
   const HISTORY_LIMIT = 10;
 
   useEffect(() => {
@@ -137,22 +138,14 @@ export default function Dashboard() {
     }
   }, [hasMoreHistory, isFetchingHistory, historyPage, fetchHistory]);
 
-  // IntersectionObserver for infinite scroll
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMoreHistory && !isFetchingHistory) {
-          loadMoreHistory();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current);
+  // Scroll handler for infinite scroll (works inside ScrollArea)
+  const handleHistoryScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLDivElement;
+    const scrollBottom = target.scrollHeight - target.scrollTop - target.clientHeight;
+    
+    if (scrollBottom < 100 && hasMoreHistory && !isFetchingHistory) {
+      loadMoreHistory();
     }
-
-    return () => observer.disconnect();
   }, [hasMoreHistory, isFetchingHistory, loadMoreHistory]);
 
   // Refresh history when a new search is made
@@ -993,7 +986,10 @@ export default function Dashboard() {
                       </h2>
                     </div>
 
-                    <ScrollArea className="h-[350px] md:h-[400px] pr-2 md:pr-4">
+                    <div 
+                      className="h-[350px] md:h-[400px] pr-2 md:pr-4 overflow-y-auto scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent"
+                      onScroll={handleHistoryScroll}
+                    >
                       <div className="space-y-3 md:space-y-4">
                         {isInitialHistoryLoad && isFetchingHistory ? (
                           <div className="flex flex-col items-center justify-center py-8">
@@ -1048,7 +1044,7 @@ export default function Dashboard() {
                           </>
                         )}
                       </div>
-                    </ScrollArea>
+                    </div>
                   </CyberCard>
                 </motion.div>
               )}
