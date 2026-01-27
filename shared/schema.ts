@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, timestamp, varchar, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, timestamp, varchar, jsonb, index } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 import { users } from "./models/auth";
@@ -13,7 +13,11 @@ export const requestLogs = pgTable("request_logs", {
   status: text("status").notNull(),
   result: jsonb("result"), // Added to store results for history
   createdAt: timestamp("created_at").defaultNow(),
-});
+}, (table) => ({
+  userIdIdx: index("request_logs_user_id_idx").on(table.userId),
+  createdAtIdx: index("request_logs_created_at_idx").on(table.createdAt),
+  userCreatedIdx: index("request_logs_user_created_idx").on(table.userId, table.createdAt),
+}));
 
 export const protectedNumbers = pgTable("protected_numbers", {
   id: serial("id").primaryKey(),

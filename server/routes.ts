@@ -222,7 +222,7 @@ export async function registerRoutes(
 
   app.get(api.user.history.path, requireAuth, async (req: any, res) => {
     const page = parseInt(req.query.page as string) || 1;
-    const limit = Math.min(parseInt(req.query.limit as string) || 20, 100); // Max 100 per request
+    const limit = Math.min(parseInt(req.query.limit as string) || 10, 50); // Default 10, max 50
     const offset = (page - 1) * limit;
     
     const history = await storage.getRequestHistory(req.user.id, limit, offset);
@@ -285,9 +285,18 @@ export async function registerRoutes(
     res.json(user);
   });
 
-  app.get("/api/admin/users/:id/history", requireAdminSession, async (req, res) => {
-    const history = await storage.getRequestHistory(req.params.id);
-    res.json(history);
+  app.get("/api/admin/users/:id/history", requireAdminSession, async (req: any, res) => {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = Math.min(parseInt(req.query.limit as string) || 10, 50); // Default 10, max 50
+    const offset = (page - 1) * limit;
+    
+    const history = await storage.getRequestHistory(req.params.id, limit, offset);
+    res.json({
+      data: history,
+      page,
+      limit,
+      hasMore: history.length === limit
+    });
   });
 
   app.post("/api/admin/users/:id/block", requireAdminSession, async (req, res) => {

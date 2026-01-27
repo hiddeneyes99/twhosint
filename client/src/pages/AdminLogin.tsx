@@ -14,10 +14,11 @@ import {
   History as HistoryIcon,
   Terminal,
   Lock,
-  ShieldAlert
+  ShieldAlert,
+  Loader2
 } from "lucide-react";
 import { useLocation } from "wouter";
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -130,10 +131,80 @@ export default function AdminLogin() {
     },
   });
 
-  const { data: userHistory, isLoading: isLoadingHistory } = useQuery<RequestLog[]>({
-    queryKey: [`/api/admin/users/${selectedUserHistory?.id}/history`],
-    enabled: !!selectedUserHistory && isLoggedIn,
-  });
+  // Infinite scroll state for admin user history
+  const [adminHistoryData, setAdminHistoryData] = useState<RequestLog[]>([]);
+  const [adminHistoryPage, setAdminHistoryPage] = useState(1);
+  const [hasMoreAdminHistory, setHasMoreAdminHistory] = useState(true);
+  const [isFetchingAdminHistory, setIsFetchingAdminHistory] = useState(false);
+  const adminLoadMoreRef = useRef<HTMLDivElement>(null);
+  const ADMIN_HISTORY_LIMIT = 10;
+
+  // Fetch admin user history with pagination
+  const fetchAdminHistory = useCallback(async (userId: string, page: number, reset: boolean = false) => {
+    if (isFetchingAdminHistory) return;
+    
+    setIsFetchingAdminHistory(true);
+    try {
+      const response = await fetch(`/api/admin/users/${userId}/history?page=${page}&limit=${ADMIN_HISTORY_LIMIT}`, {
+        credentials: "include",
+      });
+      
+      if (!response.ok) throw new Error("Failed to fetch history");
+      
+      const result = await response.json();
+      const newData = result.data || [];
+      
+      if (reset) {
+        setAdminHistoryData(newData);
+        setAdminHistoryPage(1);
+      } else {
+        setAdminHistoryData(prev => [...prev, ...newData]);
+      }
+      
+      setHasMoreAdminHistory(result.hasMore);
+    } catch (error) {
+      console.error("Error fetching admin history:", error);
+    } finally {
+      setIsFetchingAdminHistory(false);
+    }
+  }, [isFetchingAdminHistory]);
+
+  // Load initial history when user is selected
+  useEffect(() => {
+    if (selectedUserHistory && isLoggedIn) {
+      setAdminHistoryData([]);
+      setAdminHistoryPage(1);
+      setHasMoreAdminHistory(true);
+      fetchAdminHistory(selectedUserHistory.id, 1, true);
+    }
+  }, [selectedUserHistory, isLoggedIn]);
+
+  // Load more when scrolling
+  const loadMoreAdminHistory = useCallback(() => {
+    if (hasMoreAdminHistory && !isFetchingAdminHistory && selectedUserHistory) {
+      const nextPage = adminHistoryPage + 1;
+      setAdminHistoryPage(nextPage);
+      fetchAdminHistory(selectedUserHistory.id, nextPage, false);
+    }
+  }, [hasMoreAdminHistory, isFetchingAdminHistory, adminHistoryPage, selectedUserHistory, fetchAdminHistory]);
+
+  // IntersectionObserver for admin history infinite scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMoreAdminHistory && !isFetchingAdminHistory) {
+          loadMoreAdminHistory();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (adminLoadMoreRef.current) {
+      observer.observe(adminLoadMoreRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasMoreAdminHistory, isFetchingAdminHistory, loadMoreAdminHistory]);
 
   const onSubmit = async (values: LoginForm) => {
     setIsLoading(true);
@@ -641,13 +712,13 @@ export default function AdminLogin() {
             </DialogDescription>
           </DialogHeader>
           <ScrollArea className="h-[400px] mt-4 border border-primary/10 rounded p-4 bg-black/50">
-            {isLoadingHistory ? (
+            {isFetchingAdminHistory && adminHistoryData.length === 0 ? (
               <div className="flex justify-center py-8">
-                <RefreshCw className="w-6 h-6 animate-spin text-primary/40" />
+                <Loader2 className="w-6 h-6 animate-spin text-primary/40" />
               </div>
-            ) : userHistory && userHistory.length > 0 ? (
+            ) : adminHistoryData.length > 0 ? (
               <div className="space-y-4">
-                {userHistory.map((log) => (
+                {adminHistoryData.map((log) => (
                   <div key={log.id} className="border-b border-primary/10 pb-4 last:border-0">
                     <div className="flex justify-between text-[10px] mb-2 font-bold">
                       <span className="text-primary uppercase tracking-widest bg-primary/10 px-2 py-0.5 rounded-sm">{log.service} MODULE</span>
@@ -658,6 +729,20 @@ export default function AdminLogin() {
                     </div>
                   </div>
                 ))}
+                
+                {/* Infinite scroll trigger */}
+                <div ref={adminLoadMoreRef} className="py-4 flex justify-center">
+                  {isFetchingAdminHistory ? (
+                    <div className="flex items-center gap-2 text-primary">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span className="font-mono text-xs">LOADING...</span>
+                    </div>
+                  ) : hasMoreAdminHistory ? (
+                    <span className="font-mono text-xs text-primary/40">SCROLL FOR MORE</span>
+                  ) : (
+                    <span className="font-mono text-xs text-primary/40">END OF LOGS</span>
+                  )}
+                </div>
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center py-12 text-primary/20">

@@ -68,6 +68,7 @@ export default function Dashboard() {
   const [protectionReason, setProtectionReason] = useState<string | null>(null);
   const [showLowCreditAlert, setShowLowCreditAlert] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [selectedHistoryLog, setSelectedHistoryLog] = useState<any>(null);
   
   // Infinite scroll state for history
   const [historyData, setHistoryData] = useState<any[]>([]);
@@ -76,7 +77,7 @@ export default function Dashboard() {
   const [isFetchingHistory, setIsFetchingHistory] = useState(false);
   const [isInitialHistoryLoad, setIsInitialHistoryLoad] = useState(true);
   const loadMoreRef = useRef<HTMLDivElement>(null);
-  const HISTORY_LIMIT = 20;
+  const HISTORY_LIMIT = 10;
 
   useEffect(() => {
     (window as any).openRedeemModal = () => setIsRedeemModalOpen(true);
@@ -1008,8 +1009,9 @@ export default function Dashboard() {
                             {historyData.map((log: any) => (
                               <div
                                 key={log.id}
-                                className="border border-primary/20 p-3 md:p-4 bg-primary/5 hover:bg-primary/10 transition-colors"
+                                className="border border-primary/20 p-3 md:p-4 bg-primary/5 hover:bg-primary/10 transition-colors cursor-pointer"
                                 data-testid={`history-log-${log.id}`}
+                                onClick={() => log.result && setSelectedHistoryLog(log)}
                               >
                                 <div className="flex flex-col sm:flex-row justify-between items-start gap-1 mb-2">
                                   <span className="text-primary font-bold uppercase text-[10px] md:text-sm">
@@ -1019,15 +1021,13 @@ export default function Dashboard() {
                                     {new Date(log.createdAt).toLocaleString()}
                                   </span>
                                 </div>
-                                <p className="font-mono text-[10px] md:text-sm text-primary/80 mb-3 md:mb-4 tracking-tight break-all">
+                                <p className="font-mono text-[10px] md:text-sm text-primary/80 tracking-tight break-all">
                                   QUERY: {log.query}
                                 </p>
                                 {log.result && (
-                                  <TerminalOutput
-                                    data={log.result}
-                                    title="HISTORICAL DATA DUMP"
-                                    className="h-auto border-primary/10"
-                                  />
+                                  <p className="text-[9px] md:text-xs text-primary/50 mt-2 font-mono">
+                                    TAP TO VIEW FULL DATA
+                                  </p>
                                 )}
                               </div>
                             ))}
@@ -1056,6 +1056,30 @@ export default function Dashboard() {
           </div>
         </div>
       </main>
+
+      {/* History Log Detail Modal */}
+      <Dialog open={!!selectedHistoryLog} onOpenChange={() => setSelectedHistoryLog(null)}>
+        <DialogContent className="max-w-3xl bg-black/95 border-primary/30">
+          <DialogHeader>
+            <DialogTitle className="text-primary font-mono uppercase tracking-widest flex items-center gap-2">
+              <History className="w-5 h-5" />
+              {selectedHistoryLog?.service} MODULE DATA
+            </DialogTitle>
+            <DialogDescription className="text-primary/50 font-mono text-xs">
+              Query: {selectedHistoryLog?.query} | {selectedHistoryLog?.createdAt && new Date(selectedHistoryLog.createdAt).toLocaleString()}
+            </DialogDescription>
+          </DialogHeader>
+          <ScrollArea className="max-h-[60vh]">
+            {selectedHistoryLog?.result && (
+              <TerminalOutput
+                data={selectedHistoryLog.result}
+                title="RETRIEVED DATA"
+                className="border-primary/20"
+              />
+            )}
+          </ScrollArea>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
