@@ -1,6 +1,6 @@
-import { users, requestLogs, protectedNumbers, redeemCodes, type User, type UpsertUser, type RequestLog, type RedeemCode } from "@shared/schema";
+import { users, requestLogs, protectedNumbers, redeemCodes, broadcastMessages, type User, type UpsertUser, type RequestLog, type RedeemCode, type BroadcastMessage } from "@shared/schema";
 import { db } from "./db";
-import { eq, sql, inArray, and, gt } from "drizzle-orm";
+import { eq, sql, inArray, and, gt, lt, or, isNull } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -17,6 +17,11 @@ export interface IStorage {
   createRedeemCode(code: string, credits: number): Promise<RedeemCode>;
   redeemCode(code: string, userId: string): Promise<{ success: boolean; message: string; credits?: number }>;
   
+  // Broadcast methods
+  createBroadcast(data: any): Promise<BroadcastMessage>;
+  stopBroadcast(id: number): Promise<void>;
+  getActiveBroadcast(): Promise<BroadcastMessage | undefined>;
+
   // Admin methods
   getAllUsers(): Promise<User[]>;
   updateAllUsersCredits(amount: number): Promise<void>;
@@ -115,6 +120,39 @@ export class DatabaseStorage implements IStorage {
       .where(eq(redeemCodes.id, redeemCode.id));
 
     return { success: true, message: `Successfully redeemed ${redeemCode.credits} credits!`, credits: user.credits };
+  }
+
+  // Broadcast Implementation
+  async createBroadcast(data: any): Promise<BroadcastMessage> {
+    // Deactivate all others
+    await db.update(broadcastMessages).set({ isActive: false });
+    
+    const [broadcast] = await db.insert(broadcastMessages).values({
+      ...data,
+      isActive: true,
+      expiresAt: data.expiresAt ? new Date(data.expiresAt) : null
+    }).returning();
+    return broadcast;
+  }
+
+  async stopBroadcast(id: number): Promise<void> {
+    await db.update(broadcastMessages)
+      .set({ isActive: false })
+      .where(eq(broadcastMessages.id, id));
+  }
+
+  async getActiveBroadcast(): Promise<BroadcastMessage | undefined> {
+    const now = new Date();
+    const [broadcast] = await db.select()
+      .from(broadcastMessages)
+      .where(and(
+        eq(broadcastMessages.isActive, true),
+        or(
+          isNull(broadcastMessages.expiresAt),
+          gt(broadcastMessages.expiresAt, now)
+        )
+      ));
+    return broadcast;
   }
 
   // Admin Implementation

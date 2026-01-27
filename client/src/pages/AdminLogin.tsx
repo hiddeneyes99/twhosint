@@ -15,7 +15,8 @@ import {
   Terminal,
   Lock,
   ShieldAlert,
-  Loader2
+  Loader2,
+  Megaphone
 } from "lucide-react";
 import { useLocation } from "wouter";
 import { useState, useEffect, useRef, useCallback } from "react";
@@ -23,10 +24,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import type { User, RequestLog } from "@shared/schema";
+import type { User, RequestLog, BroadcastMessage } from "@shared/schema";
 import { motion, AnimatePresence } from "framer-motion";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const loginSchema = z.object({
   id: z.string().min(1, "ID is required"),
@@ -45,10 +47,66 @@ export default function AdminLogin() {
   const [selectedUserHistory, setSelectedUserHistory] = useState<{ id: string; email: string } | null>(null);
   const [isProtectedModalOpen, setIsProtectedModalOpen] = useState(false);
   const [isAdminToolsOpen, setIsAdminToolsOpen] = useState(false);
+  const [isBroadcastModalOpen, setIsBroadcastModalOpen] = useState(false);
   const [protectedInput, setProtectedInput] = useState({ number: "", reason: "" });
   const [toolInput, setToolInput] = useState({ credits: 10 });
+  const [broadcastInput, setBroadcastInput] = useState({
+    title: "",
+    message: "",
+    type: "INFO",
+    mediaUrl: "",
+    mediaType: "image",
+    actionLink: "",
+    durationMinutes: "60"
+  });
   const [generatedCode, setGeneratedCode] = useState<string | null>(null);
   const [selectedLog, setSelectedLog] = useState<RequestLog | null>(null);
+
+  const { data: activeBroadcast, refetch: refetchBroadcast } = useQuery<BroadcastMessage | null>({
+    queryKey: ["/api/broadcast/active"],
+    enabled: isLoggedIn,
+  });
+
+  const createBroadcastMutation = useMutation({
+    mutationFn: async (data: any) => {
+      const expiresAt = data.durationMinutes ? new Date(Date.now() + parseInt(data.durationMinutes) * 60000).toISOString() : null;
+      const res = await fetch("/api/admin/broadcast", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, expiresAt }),
+      });
+      if (!res.ok) throw new Error("Failed to create broadcast");
+      return res.json();
+    },
+    onSuccess: () => {
+      refetchBroadcast();
+      setIsBroadcastModalOpen(false);
+      setBroadcastInput({
+        title: "",
+        message: "",
+        type: "INFO",
+        mediaUrl: "",
+        mediaType: "image",
+        actionLink: "",
+        durationMinutes: "60"
+      });
+      toast({ title: "BROADCAST LIVE", description: "The message has been sent to all users." });
+    },
+  });
+
+  const stopBroadcastMutation = useMutation({
+    mutationFn: async (id: number) => {
+      const res = await fetch(`/api/admin/broadcast/${id}/stop`, {
+        method: "POST",
+      });
+      if (!res.ok) throw new Error("Failed to stop broadcast");
+      return res.json();
+    },
+    onSuccess: () => {
+      refetchBroadcast();
+      toast({ title: "BROADCAST STOPPED", description: "The message has been removed." });
+    },
+  });
 
   const form = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
@@ -461,7 +519,163 @@ export default function AdminLogin() {
               <div className="text-2xl font-bold">UTILITIES</div>
             </CardContent>
           </Card>
+          <Card 
+            className={`bg-zinc-950 border-primary/20 hover:border-primary/40 transition-colors cursor-pointer ${activeBroadcast ? 'border-primary shadow-[0_0_15px_rgba(34,197,94,0.2)]' : ''}`}
+            onClick={() => setIsBroadcastModalOpen(true)}
+          >
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-bold flex items-center gap-2">
+                <Megaphone className="w-4 h-4" /> BROADCAST_SYSTEM
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{activeBroadcast ? "ACTIVE" : "OFFLINE"}</div>
+            </CardContent>
+          </Card>
         </div>
+
+        <Dialog open={isBroadcastModalOpen} onOpenChange={setIsBroadcastModalOpen}>
+          <DialogContent className="bg-zinc-950 border-primary/20 text-primary font-mono max-w-2xl overflow-y-auto max-h-[90vh]">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2 uppercase tracking-widest text-primary">
+                <Megaphone className="w-5 h-5" />
+                SYSTEM_BROADCAST_CONTROL
+              </DialogTitle>
+              <DialogDescription className="text-primary/40 uppercase text-[10px] tracking-widest">
+                SEND LIVE ALERTS AND MEDIA TO ALL USERS
+              </DialogDescription>
+            </DialogHeader>
+
+            {activeBroadcast ? (
+              <div className="space-y-4 border border-primary/30 p-4 bg-primary/5 rounded">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="text-primary font-bold uppercase text-lg">{activeBroadcast.title}</h3>
+                    <p className="text-white/70 text-sm mt-1">{activeBroadcast.message}</p>
+                    <div className="mt-2 flex gap-4 text-[10px] uppercase text-primary/60">
+                      <span>Type: {activeBroadcast.type}</span>
+                      {activeBroadcast.expiresAt && (
+                        <span>Expires: {new Date(activeBroadcast.expiresAt).toLocaleString()}</span>
+                      )}
+                    </div>
+                  </div>
+                  <Button 
+                    variant="destructive" 
+                    size="sm"
+                    className="bg-red-900/50 hover:bg-red-600 border border-red-500 h-9"
+                    onClick={() => stopBroadcastMutation.mutate(activeBroadcast.id)}
+                    disabled={stopBroadcastMutation.isPending}
+                  >
+                    🛑 STOP_NOW
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <div className="text-center py-6 border border-dashed border-primary/20 rounded">
+                <p className="text-primary/40 text-xs">NO ACTIVE BROADCAST</p>
+              </div>
+            )}
+
+            <div className="space-y-4 mt-6">
+              <h3 className="text-xs font-bold uppercase tracking-widest border-b border-primary/20 pb-1">Create New Broadcast</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-[10px] uppercase text-primary/40">Title</label>
+                  <Input 
+                    value={broadcastInput.title}
+                    onChange={(e) => setBroadcastInput({...broadcastInput, title: e.target.value})}
+                    className="bg-black/50 border-primary/20 h-8 text-sm"
+                    placeholder="⚡ FLASH SALE"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-[10px] uppercase text-primary/40">Type</label>
+                  <Select 
+                    value={broadcastInput.type} 
+                    onValueChange={(v) => setBroadcastInput({...broadcastInput, type: v})}
+                  >
+                    <SelectTrigger className="bg-black/50 border-primary/20 h-8 text-sm">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="bg-zinc-950 border-primary/20 text-primary">
+                      <SelectItem value="INFO">INFO</SelectItem>
+                      <SelectItem value="WARNING">WARNING</SelectItem>
+                      <SelectItem value="PROMO">PROMO</SelectItem>
+                      <SelectItem value="VIDEO">VIDEO</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-[10px] uppercase text-primary/40">Message</label>
+                <textarea 
+                  value={broadcastInput.message}
+                  onChange={(e) => setBroadcastInput({...broadcastInput, message: e.target.value})}
+                  className="w-full bg-black/50 border border-primary/20 p-2 text-sm font-mono min-h-[80px] rounded focus:outline-none focus:border-primary/50"
+                  placeholder="ENETR MESSAGE CONTENT..."
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-[10px] uppercase text-primary/40">Media URL (Optional)</label>
+                  <Input 
+                    value={broadcastInput.mediaUrl}
+                    onChange={(e) => setBroadcastInput({...broadcastInput, mediaUrl: e.target.value})}
+                    className="bg-black/50 border-primary/20 h-8 text-sm"
+                    placeholder="HTTPS://..."
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-[10px] uppercase text-primary/40">Media Type</label>
+                  <Select 
+                    value={broadcastInput.mediaType} 
+                    onValueChange={(v) => setBroadcastInput({...broadcastInput, mediaType: v})}
+                  >
+                    <SelectTrigger className="bg-black/50 border-primary/20 h-8 text-sm">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="bg-zinc-950 border-primary/20 text-primary">
+                      <SelectItem value="image">IMAGE</SelectItem>
+                      <SelectItem value="video">VIDEO (MP4)</SelectItem>
+                      <SelectItem value="youtube">YOUTUBE</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-[10px] uppercase text-primary/40">Action Link (Optional)</label>
+                  <Input 
+                    value={broadcastInput.actionLink}
+                    onChange={(e) => setBroadcastInput({...broadcastInput, actionLink: e.target.value})}
+                    className="bg-black/50 border-primary/20 h-8 text-sm"
+                    placeholder="HTTPS://T.ME/..."
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-[10px] uppercase text-primary/40">Duration (Minutes)</label>
+                  <Input 
+                    type="number"
+                    value={broadcastInput.durationMinutes}
+                    onChange={(e) => setBroadcastInput({...broadcastInput, durationMinutes: e.target.value})}
+                    className="bg-black/50 border-primary/20 h-8 text-sm"
+                  />
+                </div>
+              </div>
+
+              <Button 
+                className="w-full bg-primary/20 hover:bg-primary/30 border border-primary/50 text-primary h-10 mt-2"
+                onClick={() => createBroadcastMutation.mutate(broadcastInput)}
+                disabled={createBroadcastMutation.isPending || !broadcastInput.title || !broadcastInput.message}
+              >
+                {createBroadcastMutation.isPending ? "SENDING..." : "🚀 LAUNCH_BROADCAST"}
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
 
         <Dialog open={isProtectedModalOpen} onOpenChange={setIsProtectedModalOpen}>
           <DialogContent className="bg-zinc-950 border-primary/20 text-primary font-mono max-w-2xl">

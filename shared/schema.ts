@@ -26,6 +26,19 @@ export const protectedNumbers = pgTable("protected_numbers", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const broadcastMessages = pgTable("broadcast_messages", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  message: text("message").notNull(),
+  type: text("type").notNull(), // INFO, WARNING, PROMO, VIDEO
+  mediaUrl: text("media_url"),
+  mediaType: text("media_type"), // image, video, youtube
+  actionLink: text("action_link"),
+  expiresAt: timestamp("expires_at"),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const redeemCodes = pgTable("redeem_codes", {
   id: serial("id").primaryKey(),
   code: text("code").notNull().unique(),
@@ -55,9 +68,16 @@ export const insertProtectedNumberSchema = createInsertSchema(protectedNumbers).
   createdAt: true
 });
 
+export const insertBroadcastMessageSchema = createInsertSchema(broadcastMessages).omit({
+  id: true,
+  createdAt: true,
+  isActive: true
+});
+
 // === TYPES ===
 export type RequestLog = typeof requestLogs.$inferSelect;
 export type RedeemCode = typeof redeemCodes.$inferSelect;
+export type BroadcastMessage = typeof broadcastMessages.$inferSelect;
 
 // Service Request Schemas
 export const mobileInfoSchema = z.object({

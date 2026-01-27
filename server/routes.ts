@@ -340,5 +340,20 @@ export async function registerRoutes(
     res.json({ success: true });
   });
 
+  app.post("/api/admin/broadcast", requireAdminSession, async (req, res) => {
+    const broadcast = await storage.createBroadcast(req.body);
+    res.json(broadcast);
+  });
+
+  app.post("/api/admin/broadcast/:id/stop", requireAdminSession, async (req, res) => {
+    await storage.stopBroadcast(parseInt(req.params.id));
+    res.json({ success: true });
+  });
+
+  app.get("/api/broadcast/active", async (req, res) => {
+    const broadcast = await storage.getActiveBroadcast();
+    res.json(broadcast || null);
+  });
+
   return httpServer;
 }
