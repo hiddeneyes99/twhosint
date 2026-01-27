@@ -1,0 +1,48 @@
+I need to implement a "Multimedia Broadcast System" for the Admin Panel with a manual "Kill Switch" (Stop Button). The Admin should be able to Create, View, and Force-Stop broadcasts instantly. The system must support Images/Videos and Auto-Expiry.
+
+Please implement the following Full-Stack changes:
+
+### 1. Database Schema (`shared/schema.ts`)
+Create a new table `broadcast_messages`.
+- **Columns:**
+  - `id`: Serial Primary Key
+  - `title`: Text (e.g., "⚡ Flash Sale")
+  - `message`: Text (Body content)
+  - `type`: Text (Enum: "INFO", "WARNING", "PROMO", "VIDEO")
+  - `mediaUrl`: Text (Nullable. URL for Image/Video)
+  - `mediaType`: Text (Nullable. "image", "video", "youtube")
+  - `actionLink`: Text (Nullable)
+  - `expiresAt`: Timestamp (Nullable)
+  - `isActive`: Boolean (Default true) <--- CRITICAL for On/Off switch
+  - `createdAt`: Timestamp
+
+### 2. Backend Logic (`server/storage.ts`)
+Update `DatabaseStorage` class:
+- **`createBroadcast(data)`**:
+  - Automatically set `isActive = false` for ALL existing broadcasts (only 1 active at a time).
+  - Insert the new broadcast with `isActive = true`.
+- **`stopBroadcast(id)`**: <--- NEW FEATURE
+  - Update the specific broadcast entry: set `isActive = false`.
+- **`getActiveBroadcast()`**:
+  - Query: Select * FROM `broadcast_messages` WHERE `isActive = true` AND (`expiresAt` IS NULL OR `expiresAt` > NOW()).
+  - This ensures stopped messages disappear immediately from the frontend.
+
+### 3. API Routes (`server/routes.ts`)
+- **POST `/api/admin/broadcast`**: Create new broadcast.
+- **POST `/api/admin/broadcast/:id/stop`**: Call `storage.stopBroadcast(id)`.
+- **GET `/api/broadcast/active`**: Fetch current active broadcast for users.
+
+### 4. Frontend Admin Panel (`client/src/pages/AdminDashboard.tsx`)
+Add a "Broadcast Management" section:
+- **Create Form:** Inputs for Title, Message, Media URL, Duration.
+- **Active Status Card:**
+  - Show the currently running broadcast details.
+  - **Red Button:** "🛑 STOP BROADCAST"
+  - When clicked, call the `/stop` API. UI should update instantly to show "No Active Broadcast".
+
+### 5. Frontend User Dashboard (`client/src/components/BroadcastPopup.tsx`)
+- Fetch `/api/broadcast/active` on mount.
+- If API returns `null` (because admin stopped it), DO NOT show the popup.
+- If API returns data, show the popup (with `localStorage` "Seen" check).
+
+**Goal:** Complete control. Admin can start a broadcast, and if needed, shut it down instantly before the expiry time.

@@ -4,6 +4,7 @@ import { Smartphone, CreditCard, Car, Globe, ArrowRight, ShieldCheck, Lock, Data
 import { CyberButton } from "@/components/CyberButton";
 import { CyberCard } from "@/components/CyberCard";
 import { Navbar } from "@/components/Navbar";
+import { BroadcastPopup } from "@/components/BroadcastPopup";
 import { useState } from "react";
 import { AuthModal } from "@/components/AuthModal";
 import { useAuth } from "@/hooks/use-auth";
@@ -32,6 +33,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col relative">
       <Navbar />
+      <BroadcastPopup />
       <main className="flex-1 container px-4 py-8 md:py-12 relative">
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 opacity-20 pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-72 md:w-96 h-72 md:h-96 bg-primary/20 rounded-full blur-[80px] md:blur-[100px]" />

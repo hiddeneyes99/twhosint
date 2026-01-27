@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2 } from "lucide-react";
+import { BroadcastPopup } from "@/components/BroadcastPopup";
 import {
   Smartphone,
   CreditCard,
@@ -353,6 +354,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden">
       <Navbar />
+      <BroadcastPopup />
 
       {/* Protected Number Alert Overlay */}
       <AnimatePresence>
