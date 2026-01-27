@@ -29,3 +29,9 @@
     - Frontend: Added IntersectionObserver for scroll detection
     - Frontend: Appends new data instead of replacing (prevData + newData)
     - Frontend: Shows loading indicator at bottom, stops when no more data
+[x] 27. Added database indexes on request_logs table (userId, createdAt, composite)
+[x] 28. Fixed History freezing issue:
+    - Changed pagination limit from 20 to 10 items per page
+    - Removed inline TerminalOutput rendering (was causing browser freeze)
+    - Added click-to-view modal for viewing full log data
+    - Both user dashboard and admin panel now use this optimized approach
