@@ -730,12 +730,11 @@ export default function Dashboard() {
                 <div className="flex justify-between">
                   <span>EXPIRY:</span>
                   <span className="text-primary font-bold">
-                    {user?.creditsExpiry ? new Date(user.creditsExpiry).toLocaleDateString() : 'NEVER'}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span>CREDITS:</span>
-                  <span className="text-primary font-bold">
+                  <span className={`font-bold transition-all duration-300 ${user?.credits !== undefined && user.credits < 5 ? "text-destructive animate-pulse drop-shadow-[0_0_8px_rgba(220,38,38,0.5)]" : "text-primary"}`}>
                     {user?.credits ?? 0}
                   </span>
                 </div>

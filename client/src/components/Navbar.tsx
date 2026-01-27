@@ -33,8 +33,10 @@ export function Navbar() {
                   <span className="font-mono text-[8px] md:text-xs text-primary truncate max-w-[50px] md:max-w-none">{user.username}</span>
                 </div>
                 <div className="flex flex-col items-end">
-                  <span className="text-[8px] md:text-[10px] text-primary/60 font-mono text-glow">CREDITS</span>
-                  <span className="font-mono text-[8px] md:text-xs font-bold text-primary text-glow">{user.credits}</span>
+                  <span className="text-[8px] md:text-[10px] text-primary/60 font-mono text-glow uppercase tracking-wider">CREDITS</span>
+                  <span className={`font-mono text-[8px] md:text-xs font-bold text-glow transition-all duration-300 ${user.credits < 5 ? "text-destructive animate-pulse drop-shadow-[0_0_8px_rgba(220,38,38,0.5)]" : "text-primary"}`}>
+                    {user.credits}
+                  </span>
                 </div>
               </div>
 
@@ -56,7 +58,7 @@ export function Navbar() {
               </Link>
               
               <Link href="/privacy">
-                <CyberButton variant={location === "/privacy" ? "primary" : "ghost"} className="text-[9px] md:text-sm px-2 md:px-4 py-1.5 md:py-2 h-auto hidden md:flex">
+                <CyberButton variant={location === "/privacy" ? "primary" : "outline"} className="text-[9px] md:text-sm px-2 md:px-4 py-1.5 md:py-2 h-auto hidden md:flex">
                   <Lock className="mr-1 h-3 w-3 md:h-4 md:w-4" />
                   <span className="hidden xs:inline">PRIVACY</span>
                 </CyberButton>
@@ -75,10 +77,10 @@ export function Navbar() {
           ) : (
             <div className="flex gap-2">
               <Link href="/privacy" className="hidden md:block">
-                <CyberButton variant="ghost" className="text-[10px] uppercase">Privacy</CyberButton>
+                <CyberButton variant="outline" className="text-[10px] uppercase">Privacy</CyberButton>
               </Link>
               <Link href="/terms" className="hidden md:block">
-                <CyberButton variant="ghost" className="text-[10px] uppercase">Terms</CyberButton>
+                <CyberButton variant="outline" className="text-[10px] uppercase">Terms</CyberButton>
               </Link>
               <CyberButton variant="primary" className="text-[10px] md:text-sm px-3 md:px-6 py-2 h-auto" onClick={() => setIsAuthModalOpen(true)}>
                 <User className="mr-1 h-3 w-3 md:h-4 md:w-4" />
