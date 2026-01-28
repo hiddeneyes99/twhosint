@@ -81,32 +81,37 @@ export function BroadcastPopup() {
         className="fixed bottom-6 right-6 z-[60] max-w-sm w-[calc(100%-3rem)] md:w-full"
       >
         <CyberCard 
-          className={`relative p-0 overflow-hidden ${styles.border} bg-black/90 backdrop-blur-xl ${styles.glow} transition-all duration-500 cursor-pointer`}
+          className={`relative p-0 overflow-hidden ${styles.border} bg-black/90 backdrop-blur-xl ${styles.glow} transition-all duration-500 cursor-pointer shadow-2xl`}
           onClick={() => !isExpanded && setIsExpanded(true)}
         >
           {/* Header / Notification Mode */}
-          <div className={`p-3 ${styles.headerBg} flex items-center justify-between gap-2`}>
+          <div className={`p-4 ${styles.headerBg} flex items-center justify-between gap-3 border-b ${styles.border}`}>
             <div className="flex items-center gap-3">
-              <div className={`p-2 rounded-full ${styles.headerBg}`}>
-                <Megaphone className={`w-4 h-4 ${styles.iconColor} ${!isExpanded ? 'animate-bounce' : ''}`} />
+              <div className={`p-2.5 rounded-xl ${styles.headerBg} border ${styles.border} shadow-inner`}>
+                <Megaphone className={`w-5 h-5 ${styles.iconColor} ${!isExpanded ? 'animate-pulse' : ''}`} />
               </div>
               <div className="flex flex-col">
-                <span className={`text-[10px] font-mono font-bold ${styles.text} uppercase tracking-widest leading-none`}>
+                <span className={`text-[10px] font-black ${styles.text} uppercase tracking-[0.2em] leading-none mb-1`}>
                   {styles.label}
                 </span>
                 {!isExpanded && (
-                  <span className="text-xs font-bold text-white uppercase mt-1 line-clamp-1">
+                  <span className="text-sm font-bold text-white uppercase line-clamp-1 tracking-tight">
                     {broadcast.title}
                   </span>
                 )}
               </div>
             </div>
-            <button
-              onClick={handleDismiss}
-              className="p-1.5 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
+            <div className="flex items-center gap-1">
+              {!isExpanded && (
+                <div className={`w-2 h-2 rounded-full ${styles.iconColor} animate-ping mr-2`} />
+              )}
+              <button
+                onClick={handleDismiss}
+                className="p-2 text-white/30 hover:text-white hover:bg-white/10 rounded-lg transition-all active:scale-95"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
           </div>
 
           {/* Expanded Content */}
@@ -116,11 +121,11 @@ export function BroadcastPopup() {
               height: isExpanded ? "auto" : 0,
               opacity: isExpanded ? 1 : 0
             }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="overflow-hidden"
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="overflow-hidden bg-gradient-to-b from-black/20 to-transparent"
           >
             {broadcast.mediaUrl && (
-              <div className={`relative aspect-video w-full bg-black/50 overflow-hidden border-b ${styles.border}`}>
+              <div className={`relative aspect-video w-full bg-black/80 overflow-hidden border-b ${styles.border} group`}>
                 {broadcast.mediaType === "video" ? (
                   <video
                     src={broadcast.mediaUrl}
@@ -128,12 +133,12 @@ export function BroadcastPopup() {
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                   />
                 ) : broadcast.mediaType === "youtube" ? (
                   <iframe
                     src={`https://www.youtube.com/embed/${broadcast.mediaUrl.split("v=")[1] || broadcast.mediaUrl.split("/").pop()}`}
-                    className="w-full h-full"
+                    className="w-full h-full opacity-80 group-hover:opacity-100 transition-opacity"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
@@ -141,50 +146,55 @@ export function BroadcastPopup() {
                   <img
                     src={broadcast.mediaUrl}
                     alt="Broadcast media"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                   />
                 )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
               </div>
             )}
 
-            <div className="p-4 space-y-4">
-              <div>
-                <h3 className={`text-xl font-black ${styles.text} leading-none uppercase tracking-tighter mb-2`}>
+            <div className="p-5 space-y-5">
+              <div className="space-y-3">
+                <h3 className={`text-2xl font-black ${styles.text} leading-[0.9] uppercase tracking-tighter filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]`}>
                   {broadcast.title}
                 </h3>
                 <div 
-                  className="text-sm text-white/80 font-mono leading-relaxed prose prose-invert prose-sm max-w-none
-                    [&_a]:text-primary [&_a]:underline [&_strong]:text-white [&_ul]:list-disc [&_ul]:pl-4"
+                  className="text-sm text-white/90 font-mono leading-relaxed prose prose-invert prose-sm max-w-none
+                    [&_a]:text-primary [&_a]:underline [&_a]:decoration-primary/30 hover:[&_a]:decoration-primary [&_a]:transition-all
+                    [&_strong]:text-white [&_strong]:font-black
+                    [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1
+                    [&_p]:mb-3 last:[&_p]:mb-0"
                   dangerouslySetInnerHTML={{ __html: broadcast.message }}
                 />
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-3 pt-2">
                 {broadcast.actionLink && (
                   <a
                     href={broadcast.actionLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1"
+                    className="flex-[2]"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <CyberButton 
                       variant={broadcast.type.toUpperCase() === "WARNING" ? "danger" : "primary"} 
-                      className={`w-full h-10 text-xs font-bold tracking-widest ${broadcast.type.toUpperCase() === "PROMO" ? "bg-yellow-500/20 border-yellow-500 text-yellow-500 hover:bg-yellow-500/40" : ""}`}
+                      className={`w-full h-11 text-[11px] font-black tracking-[0.15em] shadow-lg active:scale-[0.98] transition-transform
+                        ${broadcast.type.toUpperCase() === "PROMO" ? "bg-yellow-500/20 border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/40" : ""}`}
                     >
-                      {broadcast.buttonText || "LEARN MORE"} <ExternalLink className="ml-2 w-3 h-3" />
+                      {broadcast.buttonText || "ACCESS_DATA"} <ExternalLink className="ml-2 w-3.5 h-3.5 opacity-70" />
                     </CyberButton>
                   </a>
                 )}
                 <CyberButton 
                   variant="outline" 
-                  className="h-10 px-4"
+                  className="h-11 px-5 text-[10px] font-bold tracking-widest border-white/10 hover:border-white/30 active:scale-[0.98] transition-transform"
                   onClick={(e) => {
                     e.stopPropagation();
                     setIsExpanded(false);
                   }}
                 >
-                  MINIMIZE
+                  COLLAPSE
                 </CyberButton>
               </div>
             </div>

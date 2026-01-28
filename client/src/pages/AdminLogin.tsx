@@ -735,14 +735,24 @@ export default function AdminLogin() {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1">
-                  <label className="text-[10px] uppercase text-primary/40">Action Link (Optional)</label>
-                  <Input 
-                    value={broadcastInput.actionLink}
-                    onChange={(e) => setBroadcastInput({...broadcastInput, actionLink: e.target.value})}
-                    className="bg-black/50 border-primary/20 h-8 text-sm"
-                    placeholder="HTTPS://T.ME/..."
-                  />
+                  <div className="space-y-1">
+                    <label className="text-[10px] uppercase text-primary/40">Action Link (Optional)</label>
+                    <Input 
+                      value={broadcastInput.actionLink}
+                      onChange={(e) => setBroadcastInput({...broadcastInput, actionLink: e.target.value})}
+                      className="bg-black/50 border-primary/20 h-8 text-sm"
+                      placeholder="HTTPS://T.ME/..."
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] uppercase text-primary/40">Button Text</label>
+                    <Input 
+                      value={broadcastInput.buttonText}
+                      onChange={(e) => setBroadcastInput({...broadcastInput, buttonText: e.target.value})}
+                      className="bg-black/50 border-primary/20 h-8 text-sm"
+                      placeholder="LEARN MORE..."
+                    />
+                  </div>
                 </div>
                 <div className="space-y-1">
                   <label className="text-[10px] uppercase text-primary/40">Duration (Minutes)</label>
