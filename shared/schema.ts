@@ -34,6 +34,7 @@ export const broadcastMessages = pgTable("broadcast_messages", {
   mediaUrl: text("media_url"),
   mediaType: text("media_type"), // image, video, youtube
   actionLink: text("action_link"),
+  buttonText: text("button_text").default("LEARN MORE"),
   expiresAt: timestamp("expires_at"),
   isActive: boolean("is_active").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow(),

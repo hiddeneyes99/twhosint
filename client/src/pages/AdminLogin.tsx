@@ -58,6 +58,7 @@ export default function AdminLogin() {
     mediaUrl: "",
     mediaType: "image",
     actionLink: "",
+    buttonText: "LEARN MORE",
     durationMinutes: "60"
   });
   const [generatedCode, setGeneratedCode] = useState<string | null>(null);
@@ -111,6 +112,7 @@ export default function AdminLogin() {
         mediaUrl: "",
         mediaType: "image",
         actionLink: "",
+        buttonText: "LEARN MORE",
         durationMinutes: "60"
       });
       toast({ title: "BROADCAST LIVE", description: "The message has been sent to all users." });
