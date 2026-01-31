@@ -108,7 +108,7 @@ export const aadharInfoSchema = z.object({
 });
 
 export const vehicleInfoSchema = z.object({
-  number: z.string().regex(/^[A-Za-z]{2}[0-9]{2}[A-Za-z0-9]+$/, "Must start with 2 letters, 2 numbers, then alphanumeric"),
+  number: z.string().regex(/^[A-Za-z]{2}.+$/, "Must start with 2 letters"),
 });
 
 export const ipInfoSchema = z.object({

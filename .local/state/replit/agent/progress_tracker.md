@@ -49,3 +49,7 @@
       - Service costs for mobile, vehicle, IP, aadhar searches
 [x] 32. Re-installed npm dependencies and verified application running on port 5000 after environment migration (2026-01-27)
 [x] 33. Re-installed npm dependencies and verified application running on port 5000 after environment migration (2026-01-31)
+[x] 34. Updated Terminal Output UI:
+    - TARGET REPORT now shows the searched number/value
+    - Changed SERVER NODE from "KOL-JIO-5G-SECURE" to "INDIA-TWH-5G-SECURE"
+    - Vehicle search validation now requires only first 2 characters to be alphabets (rest can be anything)

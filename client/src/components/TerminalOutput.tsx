@@ -96,7 +96,7 @@ export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoa
           </div>
           <div className="flex items-center gap-4">
             <span className="text-primary/60 font-black min-w-[120px]">👮 SERVER NODE   :</span>
-            <span className="text-primary font-black">KOL-JIO-5G-SECURE</span>
+            <span className="text-primary font-black">INDIA-TWH-5G-SECURE</span>
           </div>
         </div>
       </div>
