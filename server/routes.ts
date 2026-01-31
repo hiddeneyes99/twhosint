@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import compression from "compression";
 import { api } from "@shared/routes";
 import {
   mobileInfoSchema,
@@ -17,6 +18,7 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express,
 ): Promise<Server> {
+  app.use(compression());
   // === API ROUTES ===
   const handleServiceRequest = async (
     req: any,
