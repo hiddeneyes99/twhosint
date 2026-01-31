@@ -76,10 +76,10 @@ export function BroadcastPopup() {
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ opacity: 0, y: 50, x: "-50%" }}
-        animate={{ opacity: 1, y: 0, x: "-50%" }}
-        exit={{ opacity: 0, y: 50, x: "-50%" }}
-        className="fixed bottom-4 left-1/2 -translate-x-1/2 z-[60] w-[92%] max-w-sm md:left-auto md:right-6 md:translate-x-0 md:bottom-6 md:w-full"
+        initial={{ opacity: 0, y: 50, x: 0 }}
+        animate={{ opacity: 1, y: 0, x: 0 }}
+        exit={{ opacity: 0, y: 50, x: 0 }}
+        className="fixed bottom-4 right-4 z-[60] w-[92%] max-w-sm md:right-6 md:bottom-6 md:w-full"
       >
         <CyberCard 
           className={`relative p-0 overflow-hidden ${styles.border} bg-black/95 backdrop-blur-2xl ${styles.glow} transition-all duration-500 cursor-pointer shadow-2xl rounded-2xl md:rounded-xl flex flex-col max-h-[85vh] md:max-h-[80vh]`}
