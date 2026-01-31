@@ -1,0 +1,43 @@
+I need to rewrite `client/src/components/TerminalOutput.tsx` to match a specific "Full-Density Intelligence Report" design.
+
+**The Problem:** Currently, if the API returns sparse data, the result card looks empty.
+**The Solution:** The UI must display a fixed grid of all potential fields (Name, Father, Address, Aadhar, Email, etc.). If the API does not provide a value for a field, display "N/A" or "---" to maintain visual density.
+
+**Design Requirements (Based on User's ASCII Concept):**
+
+1.  **Header Section (The "Terminal" Look):**
+    - Title: "🔒 TWH-SECURE INTELLIGENCE TERMINAL [v4.0]"
+    - Sub-header: "🔴 LIVE FEED: ENCRYPTED"
+    - Target Info: Display the search Query/Mobile number prominently.
+    - Status Badges: "✅ ACTIVE TRACKING", "👮 SERVER: KOL-JIO-5G-SECURE".
+
+2.  **Data Grid (The "Meat"):**
+    - Render a 2-column or 3-column grid.
+    - **CRITICAL:** Explicitly render slots for:
+      - `Mobile`
+      - `Name`
+      - `Father's Name`
+      - `Address` (Clean up '!' characters)
+      - `Alt Contact`
+      - `Circle` / `State`
+      - `Aadhar / ID` (If missing, show "N/A" with a lock icon)
+      - `Email` (If missing, show "N/A")
+    - Use `lucide-react` icons for every single field to make it look graphical.
+
+3.  **Visual Connectors:**
+    - If `data.data` has multiple records, draw a visual "Link/Arrow" (⬇️ LINKED CONNECTION DETECTED) between the cards.
+
+4.  **Footer Section (The "Filler"):**
+    - Add a "SYSTEM METADATA" box at the bottom (even if fake) to make the report look heavy.
+    - Lines to include:
+      - `> Packet intercepted from TwhOsnit secure gateway.`
+      - `> Data parsing complete. 2048-bit decryption verified.`
+      - `> LATENCY: 0.9s | CONFIDENCE SCORE: 98.9%`
+    - **Signature:** "💝 Made with ♡ by Technical White Hat 💝" centered at the bottom.
+
+**Implementation Strategy:**
+- Use `bg-black` or very dark backgrounds.
+- Use Monospace fonts for the values to look like data.
+- Use Green/Cyan accents for success, Red for alerts.
+
+Please generate the full React component code for `TerminalOutput.tsx`.
