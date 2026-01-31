@@ -69,6 +69,24 @@ export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoa
 
   const records = dataType === 'mobile' ? getMobileRecords() : [];
 
+  const getRecordCount = () => {
+    if (dataType === 'mobile') return records.length;
+    if (dataType === 'vehicle' || dataType === 'ip') return 1;
+    return 0;
+  };
+
+  // Reset visible count when data changes
+  React.useEffect(() => {
+    setVisibleCount(5);
+  }, [data]);
+
+  const hasData = () => {
+    if (dataType === 'mobile') return records.length > 0;
+    if (dataType === 'vehicle') return !!(data.details || data.rc_number);
+    if (dataType === 'ip') return !!(data.city || data.isp || data.country);
+    return false;
+  };
+
   if (isLoading) {
     return (
       <div className={cn("border-4 border-double border-primary/50 bg-black font-mono text-sm relative overflow-hidden min-h-[400px]", className)}>
@@ -231,24 +249,6 @@ export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoa
         )}
       </div>
     );
-  };
-
-  const getRecordCount = () => {
-    if (dataType === 'mobile') return records.length;
-    if (dataType === 'vehicle' || dataType === 'ip') return 1;
-    return 0;
-  };
-
-  // Reset visible count when data changes
-  React.useEffect(() => {
-    setVisibleCount(5);
-  }, [data]);
-
-  const hasData = () => {
-    if (dataType === 'mobile') return records.length > 0;
-    if (dataType === 'vehicle') return data.details || data.rc_number;
-    if (dataType === 'ip') return data.city || data.isp || data.country;
-    return false;
   };
 
   return (
