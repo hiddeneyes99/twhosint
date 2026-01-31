@@ -18,6 +18,7 @@ interface TerminalOutputProps {
 type DataType = 'mobile' | 'vehicle' | 'ip' | 'unknown';
 
 export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoading }: TerminalOutputProps) {
+  const [visibleCount, setVisibleCount] = React.useState(5);
   const cleanAddress = (addr: string) => addr?.replace(/!/g, ' ') || "N/A";
 
   const detectDataType = (): DataType => {
@@ -177,37 +178,59 @@ export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoa
   };
 
   const renderMobileData = () => {
-    return records.map((item: any, index: number) => (
-      <React.Fragment key={index}>
-        {index > 0 && (
-          <div className="w-full border-t border-primary/10 border-dashed my-4" />
-        )}
-        
-        <div className="space-y-4 md:space-y-6">
-          <div className="border-y border-primary/20 bg-primary/5 py-1.5 px-3 md:px-4 flex items-center justify-between">
-            <span className="text-primary font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-[10px] md:text-xs flex items-center gap-2">
-              📂 RECORD #{String(index + 1).padStart(2, '0')} - {index === 0 ? "DIRECT MATCH" : "ASSOCIATED ENTITY"}
-            </span>
-            <span className="text-[8px] md:text-[9px] text-primary/30 font-mono">UID: {item.id || "N/A"}</span>
-          </div>
+    const recordsToShow = records.slice(0, visibleCount);
+    const hasMore = records.length > visibleCount;
 
-          <div className="grid grid-cols-1 gap-y-3 md:gap-y-4 pl-3 md:pl-4 border-l-2 md:border-l-4 border-double border-primary/20 py-1 md:py-2">
-            <ReportLine icon="📱" label="Mobile" value={item.mobile} highlight />
-            <ReportLine icon="👤" label="NAME" value={item.name} />
-            <ReportLine icon="👨‍🦳" label="FATHER" value={item.father_name} />
-            <ReportLine icon="📍" label="Address" value={cleanAddress(item.address)} isAddress />
-            <ReportLine icon="📞" label="ALT CONTACT" value={item.alt_mobile} />
-            <ReportLine icon="🇮🇳" label="Country" value="India" />
-            <ReportLine icon="📡" label="Circle" value={item.circle?.includes(' ') ? item.circle.split(' ')[0] : item.circle} />
-            <ReportLine icon="🗺️" label="State" value={item.circle?.includes(' ') ? item.circle.split(' ').slice(1).join(' ') : item.state} />
-            <ReportLine icon="🆔" label="Aadhar" value={item.id_number} />
-            <ReportLine icon="✉️" label="Email" value={item.email} />
+    return (
+      <div className="space-y-8 md:space-y-12">
+        {recordsToShow.map((item: any, index: number) => (
+          <React.Fragment key={index}>
+            {index > 0 && (
+              <div className="w-full border-t border-primary/10 border-dashed my-4" />
+            )}
+            
+            <div className="space-y-4 md:space-y-6">
+              <div className="border-y border-primary/20 bg-primary/5 py-1.5 px-3 md:px-4 flex items-center justify-between">
+                <span className="text-primary font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-[10px] md:text-xs flex items-center gap-2">
+                  📂 RECORD #{String(index + 1).padStart(2, '0')} - {index === 0 ? "DIRECT MATCH" : "ASSOCIATED ENTITY"}
+                </span>
+                <span className="text-[8px] md:text-[9px] text-primary/30 font-mono">UID: {item.id || "N/A"}</span>
+              </div>
+
+              <div className="grid grid-cols-1 gap-y-3 md:gap-y-4 pl-3 md:pl-4 border-l-2 md:border-l-4 border-double border-primary/20 py-1 md:py-2">
+                <ReportLine icon="📱" label="Mobile" value={item.mobile} highlight />
+                <ReportLine icon="👤" label="NAME" value={item.name} />
+                <ReportLine icon="👨‍🦳" label="FATHER" value={item.father_name} />
+                <ReportLine icon="📍" label="Address" value={cleanAddress(item.address)} isAddress />
+                <ReportLine icon="📞" label="ALT CONTACT" value={item.alt_mobile} />
+                <ReportLine icon="🇮🇳" label="Country" value="India" />
+                <ReportLine icon="📡" label="Circle" value={item.circle?.includes(' ') ? item.circle.split(' ')[0] : item.circle} />
+                <ReportLine icon="🗺️" label="State" value={item.circle?.includes(' ') ? item.circle.split(' ').slice(1).join(' ') : item.state} />
+                <ReportLine icon="🆔" label="Aadhar" value={item.id_number} />
+                <ReportLine icon="✉️" label="Email" value={item.email} />
+              </div>
+              
+              <div className="h-px bg-primary/10 w-full" />
+            </div>
+          </React.Fragment>
+        ))}
+
+        {hasMore && (
+          <div className="flex flex-col items-center justify-center py-8 gap-4">
+            <div className="text-primary/40 animate-bounce">
+              <ArrowDownCircle className="w-8 h-8" />
+            </div>
+            <button
+              onClick={() => setVisibleCount(prev => prev + 10)}
+              className="px-6 py-2 bg-primary/20 hover:bg-primary/30 border border-primary/50 text-primary font-black uppercase tracking-widest text-xs transition-all hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(34,197,94,0.2)]"
+            >
+              LOAD NEXT 10 FRAGMENTS ({records.length - visibleCount} REMAINING)
+            </button>
+            <p className="text-[10px] text-primary/30 font-mono">ENCRYPTED DATA STREAM CONTINUES...</p>
           </div>
-          
-          <div className="h-px bg-primary/10 w-full" />
-        </div>
-      </React.Fragment>
-    ));
+        )}
+      </div>
+    );
   };
 
   const getRecordCount = () => {
@@ -215,6 +238,11 @@ export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoa
     if (dataType === 'vehicle' || dataType === 'ip') return 1;
     return 0;
   };
+
+  // Reset visible count when data changes
+  React.useEffect(() => {
+    setVisibleCount(5);
+  }, [data]);
 
   const hasData = () => {
     if (dataType === 'mobile') return records.length > 0;
