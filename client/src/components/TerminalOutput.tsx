@@ -105,37 +105,31 @@ export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoa
         <span className="text-primary font-black uppercase tracking-widest text-[11px]">📊 DATA ANALYSIS REPORT ({records.length} Records Found)</span>
       </div>
 
-      <ScrollArea className="h-[550px] md:h-[650px] w-full bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[length:100%_2px,3px_100%]">
-        <div className="p-4 md:p-8 space-y-12">
+      <ScrollArea className="h-[550px] md:h-[650px] w-full bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[length:100%_2px,3px_100%] overflow-x-hidden">
+        <div className="p-3 md:p-8 space-y-8 md:space-y-12">
           {records.length > 0 ? records.map((item: any, index: number) => (
             <React.Fragment key={index}>
               {index > 0 && (
-                <div className="flex flex-col items-center py-6">
-                  <div className="text-primary/40 font-black text-xs leading-none tracking-widest">||</div>
-                  <div className="text-primary/40 font-black text-xs leading-none tracking-widest">||</div>
-                  <div className="my-2 px-6 py-1 border border-primary/30 bg-primary/5 rounded-sm">
-                    <span className="text-[10px] font-black text-primary/60 tracking-[0.2em] uppercase">LINKED CONNECTION DETECTED (CROSS-REFERENCE)</span>
-                  </div>
-                  <div className="text-primary/40 font-black text-xs leading-none animate-bounce">\/</div>
-                </div>
+                <div className="w-full border-t border-primary/10 border-dashed my-4" />
               )}
               
-              <div className="space-y-6">
-                <div className="border-y border-primary/20 bg-primary/5 py-1.5 px-4 flex items-center justify-between">
-                  <span className="text-primary font-black uppercase tracking-[0.2em] text-xs flex items-center gap-2">
+              <div className="space-y-4 md:space-y-6">
+                <div className="border-y border-primary/20 bg-primary/5 py-1.5 px-3 md:px-4 flex items-center justify-between">
+                  <span className="text-primary font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-[10px] md:text-xs flex items-center gap-2">
                     📂 RECORD #{String(index + 1).padStart(2, '0')} - {index === 0 ? "DIRECT MATCH" : "ASSOCIATED ENTITY"}
                   </span>
-                  <span className="text-[9px] text-primary/30 font-mono">UID: {item.id || "N/A"}</span>
+                  <span className="text-[8px] md:text-[9px] text-primary/30 font-mono">UID: {item.id || "N/A"}</span>
                 </div>
 
-                <div className="grid grid-cols-1 gap-y-4 pl-4 border-l-4 border-double border-primary/20 py-2">
+                <div className="grid grid-cols-1 gap-y-3 md:gap-y-4 pl-3 md:pl-4 border-l-2 md:border-l-4 border-double border-primary/20 py-1 md:py-2">
                   <ReportLine icon="📱" label="Mobile" value={item.mobile} highlight />
                   <ReportLine icon="👤" label="NAME" value={item.name} />
                   <ReportLine icon="👨‍🦳" label="FATHER" value={item.father_name} />
                   <ReportLine icon="📍" label="Address" value={cleanAddress(item.address)} isAddress />
                   <ReportLine icon="📞" label="ALT CONTACT" value={item.alt_mobile} />
-                  <ReportLine icon="🌐" label="Circle" value={item.circle} />
-                  <ReportLine icon="🌏" label="state" value={item.state || item.circle} />
+                  <ReportLine icon="🇮🇳" label="Country" value="India" />
+                  <ReportLine icon="📡" label="Circle" value={item.circle} />
+                  <ReportLine icon="🗺️" label="State" value={item.state} />
                   <ReportLine icon="🆔" label="Aadhar" value={item.id_number} />
                   <ReportLine icon="✉️" label="Email" value={item.email} />
                 </div>
@@ -185,15 +179,15 @@ function ReportLine({ icon, label, value, highlight = false, isAddress = false }
 
   return (
     <div className="flex flex-col md:flex-row md:items-start gap-1 md:gap-4 group">
-      <div className="flex items-center gap-3 min-w-[160px]">
-        <span className="text-xl grayscale group-hover:grayscale-0 transition-all flex-shrink-0">{icon}</span>
-        <span className="text-primary font-black uppercase tracking-tight text-sm md:text-base whitespace-nowrap">
+      <div className="flex items-center gap-3 min-w-[120px] md:min-w-[160px]">
+        <span className="text-xl transition-all flex-shrink-0">{icon}</span>
+        <span className="text-primary font-black uppercase tracking-tight text-xs md:text-base whitespace-nowrap">
           {label}:
         </span>
       </div>
       <div className="flex items-start gap-2 flex-1 min-w-0">
         <span className={cn(
-          "font-mono text-sm md:text-base tracking-wide leading-tight break-words",
+          "font-mono text-xs md:text-base tracking-wide leading-tight break-words",
           highlight ? "text-primary font-black bg-primary/20 px-2 rounded-sm border border-primary/30" : "text-white/90",
           isEmpty && "text-white/20 italic"
         )}>
@@ -206,7 +200,7 @@ function ReportLine({ icon, label, value, highlight = false, isAddress = false }
             rel="noopener noreferrer"
             className="text-primary/40 hover:text-primary transition-colors p-1 bg-primary/5 rounded flex-shrink-0"
           >
-            <Globe className="w-5 h-5" />
+            <Globe className="w-4 h-4 md:w-5 md:h-5" />
           </a>
         )}
       </div>
