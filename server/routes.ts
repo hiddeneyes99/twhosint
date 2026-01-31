@@ -77,18 +77,65 @@ export async function registerRoutes(
         });
       }
 
-      // Execute API call
+      // Execute API call with retry logic
       let data;
-      try {
-        data = await apiCallback();
-        if (data && data.error) {
-          return res.status(400).json({ message: data.error });
+      let attempts = 0;
+      const maxRetries = 10;
+      let lastError = null;
+
+      while (attempts < maxRetries) {
+        attempts++;
+        try {
+          data = await apiCallback();
+          
+          if (data && data.error) {
+            const errorMsg = String(data.error).toLowerCase();
+            
+            // If "not found", don't retry, just return
+            if (errorMsg.includes("not found") || errorMsg.includes("no data")) {
+              return res.status(404).json({ message: data.error || "Data not found" });
+            }
+            
+            // If "internal error", retry
+            if (errorMsg.includes("internal error") || errorMsg.includes("server error")) {
+              console.log(`Attempt ${attempts} failed with internal error for ${serviceName}: ${query}. Retrying...`);
+              lastError = data.error;
+              if (attempts < maxRetries) {
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1s before retry
+                continue;
+              }
+            }
+            
+            // Other errors, don't retry
+            return res.status(400).json({ message: data.error });
+          }
+          
+          // Success! Break the loop
+          break;
+        } catch (error: any) {
+          const errorMsg = error.message?.toLowerCase() || "";
+          console.error(`Attempt ${attempts} exception for ${serviceName}:`, error);
+          
+          lastError = error.message;
+          
+          // Retry on specific exceptions if needed, or all exceptions up to limit
+          if (attempts < maxRetries) {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            continue;
+          }
+          
+          return res.status(500).json({ 
+            message: error.message || "External API failed",
+            attempts 
+          });
         }
-      } catch (error: any) {
-        console.error(`${serviceName} API Error:`, error);
-        return res
-          .status(500)
-          .json({ message: error.message || "External API failed" });
+      }
+
+      if (!data) {
+        return res.status(500).json({ 
+          message: lastError || "Failed after maximum retries",
+          attempts 
+        });
       }
 
       // Deduct credit and log request
