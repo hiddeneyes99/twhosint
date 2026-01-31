@@ -198,8 +198,8 @@ export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoa
             <ReportLine icon="📍" label="Address" value={cleanAddress(item.address)} isAddress />
             <ReportLine icon="📞" label="ALT CONTACT" value={item.alt_mobile} />
             <ReportLine icon="🇮🇳" label="Country" value="India" />
-            <ReportLine icon="📡" label="Circle" value={item.circle} />
-            <ReportLine icon="🗺️" label="State" value={item.state} />
+            <ReportLine icon="📡" label="Circle" value={item.circle?.includes(' ') ? item.circle.split(' ')[0] : item.circle} />
+            <ReportLine icon="🗺️" label="State" value={item.circle?.includes(' ') ? item.circle.split(' ').slice(1).join(' ') : item.state} />
             <ReportLine icon="🆔" label="Aadhar" value={item.id_number} />
             <ReportLine icon="✉️" label="Email" value={item.email} />
           </div>

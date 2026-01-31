@@ -33,6 +33,9 @@ export interface IStorage {
   // Settings methods
   getSettings(): Promise<AppSettings>;
   updateSettings(settings: Partial<AppSettings>): Promise<AppSettings>;
+  
+  // Cache methods
+  getCachedRequest(service: string, query: string): Promise<RequestLog | undefined>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -212,6 +215,22 @@ export class DatabaseStorage implements IStorage {
       .where(eq(appSettings.id, settings.id))
       .returning();
     return updated;
+  }
+
+  async getCachedRequest(service: string, query: string): Promise<RequestLog | undefined> {
+    const [log] = await db
+      .select()
+      .from(requestLogs)
+      .where(
+        and(
+          eq(requestLogs.service, service),
+          eq(requestLogs.query, query),
+          eq(requestLogs.status, "SUCCESS")
+        )
+      )
+      .orderBy(sql`${requestLogs.createdAt} DESC`)
+      .limit(1);
+    return log;
   }
 }
 

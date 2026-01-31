@@ -49,6 +49,18 @@ export async function registerRoutes(
         });
       }
 
+      // Check Cache first
+      const cachedResult = await storage.getCachedRequest(serviceName, query);
+      if (cachedResult && cachedResult.result) {
+        console.log(`Serving cached result for ${serviceName}: ${query}`);
+        return res.json({
+          success: true,
+          data: cachedResult.result,
+          creditsRemaining: user.credits,
+          cached: true
+        });
+      }
+
       const serviceCosts = settings.serviceCosts as Record<string, number>;
       const cost = serviceCosts[serviceName] ?? 1;
 
