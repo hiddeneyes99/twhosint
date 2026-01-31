@@ -53,3 +53,8 @@
     - TARGET REPORT now shows the searched number/value
     - Changed SERVER NODE from "KOL-JIO-5G-SECURE" to "INDIA-TWH-5G-SECURE"
     - Vehicle search validation now requires only first 2 characters to be alphabets (rest can be anything)
+[x] 35. Fixed Vehicle and IP data display issue:
+    - TerminalOutput component now auto-detects data type (mobile/vehicle/ip)
+    - Added proper rendering for Vehicle data (RC number, Owner, Phone, Address, Model, Insurance, etc.)
+    - Added proper rendering for IP data (City, Country, ISP, Org, Coordinates, Timezone, etc.)
+    - Each data type now shows formatted fields instead of "NO DIRECT DATA FRAGMENTS LOCATED"
