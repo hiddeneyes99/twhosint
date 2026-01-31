@@ -3,21 +3,9 @@ import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { 
   Globe, 
-  ShieldCheck, 
   Terminal, 
-  Radio, 
-  Phone, 
-  User, 
-  UserCircle, 
-  MapPin, 
-  Navigation, 
-  CreditCard, 
-  Mail, 
-  Lock,
   ArrowDownCircle,
-  Activity,
-  Cpu,
-  Fingerprint
+  ChevronRight
 } from "lucide-react";
 
 interface TerminalOutputProps {
@@ -51,8 +39,8 @@ export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoa
 
   if (isLoading) {
     return (
-      <div className={cn("border border-primary/50 bg-black font-mono text-sm relative overflow-hidden min-h-[400px]", className)}>
-        <div className="flex items-center justify-between px-4 py-2 border-b border-primary/30 bg-primary/5">
+      <div className={cn("border-4 border-double border-primary/50 bg-black font-mono text-sm relative overflow-hidden min-h-[400px]", className)}>
+        <div className="flex items-center justify-between px-4 py-2 border-b-4 border-double border-primary/30 bg-primary/5">
           <div className="flex items-center gap-2">
             <span className="text-primary animate-pulse">🔒 TWH-SECURE INTELLIGENCE TERMINAL [v4.0]</span>
           </div>
@@ -73,7 +61,7 @@ export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoa
 
   if (!data) {
     return (
-      <div className={cn("border border-primary/50 bg-black font-mono text-sm relative overflow-hidden h-[300px] flex flex-col items-center justify-center", className)}>
+      <div className={cn("border-4 border-double border-primary/50 bg-black font-mono text-sm relative overflow-hidden h-[300px] flex flex-col items-center justify-center", className)}>
         <Terminal className="w-8 h-8 text-primary/20 mb-4" />
         <p className="text-primary/30 uppercase tracking-[0.3em]">AWAITING INPUT</p>
         <div className="mt-4 flex gap-2">
@@ -86,109 +74,102 @@ export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoa
   }
 
   return (
-    <div className={cn("border border-primary/50 bg-black font-mono text-[10px] md:text-sm relative overflow-hidden", className)}>
-      {/* Header Section */}
-      <div className="px-4 py-3 border-b border-primary/30 bg-zinc-950/50 flex flex-col gap-2">
-        <div className="flex items-center justify-between">
+    <div className={cn("border-4 border-double border-primary/50 bg-black font-mono text-[10px] md:text-sm relative overflow-hidden", className)}>
+      {/* ASCII Header Section */}
+      <div className="bg-zinc-950">
+        <div className="px-4 py-2 border-b-4 border-double border-primary/30 flex items-center justify-between">
+          <span className="text-primary font-black uppercase tracking-tight text-xs md:text-sm">🔒 TWH-SECURE INTELLIGENCE TERMINAL [v4.0]</span>
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-primary" />
-            <span className="text-primary font-black uppercase tracking-tighter text-sm md:text-base">🔒 TWH-SECURE INTELLIGENCE TERMINAL [v4.0]</span>
-          </div>
-          <div className="flex gap-1">
-            <div className="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
-            <div className="w-2 h-2 rounded-full bg-yellow-500" />
-            <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
+            <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
+            <span className="text-red-500 text-[10px] font-black uppercase tracking-tighter">LIVE FEED: ENCRYPTED</span>
           </div>
         </div>
         
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-1.5 px-2 py-0.5 bg-red-500/10 border border-red-500/30 rounded text-red-500 text-[9px] font-black animate-pulse">
-            <Activity className="w-3 h-3" />
-            LIVE FEED: ENCRYPTED
+        <div className="px-4 py-3 space-y-1 border-b-4 border-double border-primary/30">
+          <div className="flex items-center gap-4">
+            <span className="text-primary/60 font-black min-w-[120px]">🕵️‍♂️ TARGET REPORT:</span>
+            <span className="text-primary font-black tracking-widest uppercase">TARGET {data.query?.value || "REDACTED"}</span>
           </div>
-          <div className="flex items-center gap-1.5 px-2 py-0.5 bg-primary/10 border border-primary/30 rounded text-primary text-[9px] font-black">
-            <ShieldCheck className="w-3 h-3" />
-            ACTIVE TRACKING
+          <div className="flex items-center gap-4">
+            <span className="text-primary/60 font-black min-w-[120px]">🟢 STATUS        :</span>
+            <span className="text-primary font-black flex items-center gap-1">✅ ACTIVE TRACKING</span>
           </div>
-          <div className="flex items-center gap-1.5 px-2 py-0.5 bg-zinc-900 border border-white/10 rounded text-white/40 text-[9px] font-black">
-            <Cpu className="w-3 h-3" />
-            SERVER: KOL-JIO-5G-SECURE
+          <div className="flex items-center gap-4">
+            <span className="text-primary/60 font-black min-w-[120px]">👮 SERVER NODE   :</span>
+            <span className="text-primary font-black">KOL-JIO-5G-SECURE</span>
           </div>
-        </div>
-
-        <div className="mt-2 flex items-center gap-2 p-2 bg-primary/5 border border-primary/20 rounded">
-          <Terminal className="w-4 h-4 text-primary/50" />
-          <span className="text-primary/40 uppercase text-[10px]">TARGET_QUERY:</span>
-          <span className="text-primary font-bold tracking-widest">{data.query?.value || "REDACTED"}</span>
         </div>
       </div>
 
-      <ScrollArea className="h-[450px] md:h-[550px] w-full">
-        <div className="p-4 md:p-6 space-y-6">
-          {records.map((item: any, index: number) => (
+      <div className="bg-primary/10 border-b-2 border-primary/30 px-4 py-2 flex items-center">
+        <span className="text-primary font-black uppercase tracking-widest text-[11px]">📊 DATA ANALYSIS REPORT ({records.length} Records Found)</span>
+      </div>
+
+      <ScrollArea className="h-[550px] md:h-[650px] w-full bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[length:100%_2px,3px_100%]">
+        <div className="p-4 md:p-8 space-y-12">
+          {records.length > 0 ? records.map((item: any, index: number) => (
             <React.Fragment key={index}>
               {index > 0 && (
-                <div className="flex flex-col items-center py-2 gap-1">
-                  <ArrowDownCircle className="w-5 h-5 text-primary animate-bounce" />
-                  <span className="text-[9px] font-black text-primary/40 tracking-[0.2em]">⬇️ LINKED CONNECTION DETECTED</span>
+                <div className="flex flex-col items-center py-6">
+                  <div className="text-primary/40 font-black text-xs leading-none tracking-widest">||</div>
+                  <div className="text-primary/40 font-black text-xs leading-none tracking-widest">||</div>
+                  <div className="my-2 px-6 py-1 border border-primary/30 bg-primary/5 rounded-sm">
+                    <span className="text-[10px] font-black text-primary/60 tracking-[0.2em] uppercase">LINKED CONNECTION DETECTED (CROSS-REFERENCE)</span>
+                  </div>
+                  <div className="text-primary/40 font-black text-xs leading-none animate-bounce">\/</div>
                 </div>
               )}
               
-              <div className="relative group">
-                {/* Decorative corners */}
-                <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-primary/50" />
-                <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-primary/50" />
-                <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-primary/50" />
-                <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-primary/50" />
-
-                <div className="bg-zinc-950/80 border border-primary/20 p-5 space-y-6">
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-2">
-                      <Fingerprint className="w-5 h-5 text-primary" />
-                      <span className="text-primary font-black uppercase tracking-widest">RECORD_FRAGMENT #{index + 1}</span>
-                    </div>
-                    <span className="text-[10px] text-primary/30 font-mono">HASH: {Math.random().toString(36).substring(7).toUpperCase()}</span>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-                    {/* Fixed Data Fields */}
-                    <DataField icon={Phone} label="MOBILE" value={item.mobile} highlight />
-                    <DataField icon={User} label="NAME" value={item.name} />
-                    <DataField icon={UserCircle} label="FATHER'S NAME" value={item.father_name} />
-                    <DataField icon={Navigation} label="CIRCLE / STATE" value={item.circle} />
-                    <DataField icon={CreditCard} label="AADHAR / ID" value={item.id_number} isLockable />
-                    <DataField icon={Mail} label="EMAIL" value={item.email} />
-                    <DataField icon={Phone} label="ALT CONTACT" value={item.alt_mobile} />
-                    <div className="md:col-span-2">
-                      <DataField icon={MapPin} label="ADDRESS" value={cleanAddress(item.address)} isAddress />
-                    </div>
-                  </div>
+              <div className="space-y-6">
+                <div className="border-y border-primary/20 bg-primary/5 py-1.5 px-4 flex items-center justify-between">
+                  <span className="text-primary font-black uppercase tracking-[0.2em] text-xs flex items-center gap-2">
+                    📂 RECORD #{String(index + 1).padStart(2, '0')} - {index === 0 ? "DIRECT MATCH" : "ASSOCIATED ENTITY"}
+                  </span>
+                  <span className="text-[9px] text-primary/30 font-mono">UID: {item.id || "N/A"}</span>
                 </div>
+
+                <div className="grid grid-cols-1 gap-y-4 pl-4 border-l-4 border-double border-primary/20 py-2">
+                  <ReportLine icon="📱" label="Mobile" value={item.mobile} highlight />
+                  <ReportLine icon="👤" label="NAME" value={item.name} />
+                  <ReportLine icon="👨‍🦳" label="FATHER" value={item.father_name} />
+                  <ReportLine icon="📍" label="Address" value={cleanAddress(item.address)} isAddress />
+                  <ReportLine icon="📞" label="ALT CONTACT" value={item.alt_mobile} />
+                  <ReportLine icon="🌐" label="Circle" value={item.circle} />
+                  <ReportLine icon="🌏" label="state" value={item.state || item.circle} />
+                  <ReportLine icon="🆔" label="Aadhar" value={item.id_number} />
+                  <ReportLine icon="✉️" label="Email" value={item.email} />
+                </div>
+                
+                <div className="h-px bg-primary/10 w-full" />
               </div>
             </React.Fragment>
-          ))}
+          )) : (
+            <div className="py-20 text-center space-y-4">
+              <div className="text-red-500/40 text-4xl animate-pulse">⚠️</div>
+              <p className="text-red-500 font-black uppercase tracking-[0.3em] text-sm">NO DIRECT DATA FRAGMENTS LOCATED</p>
+              <p className="text-primary/30 font-mono text-[10px]">VERIFY TARGET_QUERY OR PERMISSIONS</p>
+            </div>
+          )}
 
           {/* System Metadata Footer */}
-          <div className="mt-8 p-4 bg-zinc-950/80 border border-primary/10 rounded-sm relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-1">
-              <Radio className="w-3 h-3 text-primary/20 animate-pulse" />
-            </div>
-            <h4 className="text-[10px] font-black text-primary/60 uppercase tracking-[0.2em] mb-3 flex items-center gap-2">
-              <Terminal className="w-3 h-3" /> SYSTEM METADATA
+          <div className="mt-12 border-4 border-double border-primary/30 bg-zinc-950 p-5 space-y-1 shadow-[0_0_20px_rgba(34,197,94,0.1)]">
+            <h4 className="text-primary font-black uppercase tracking-[0.3em] text-[12px] mb-4 flex items-center gap-2 border-b border-primary/20 pb-2">
+              <span className="text-lg">📟</span> SYSTEM METADATA
             </h4>
-            <div className="space-y-1.5 font-mono text-[9px] md:text-[10px]">
-              <p className="text-primary/40 leading-none"> {">"} Packet intercepted from TwhOsnit secure gateway.</p>
-              <p className="text-primary/40 leading-none"> {">"} Data parsing complete. 2048-bit decryption verified.</p>
-              <div className="flex gap-4 pt-1">
-                <p className="text-primary/40"> {">"} LATENCY: <span className="text-primary/70">0.9s</span></p>
-                <p className="text-primary/40"> {">"} CONFIDENCE SCORE: <span className="text-green-500/70">98.9%</span></p>
+            <div className="space-y-1.5 font-mono text-[10px] md:text-[11px]">
+              <MetadataLine text="Packet intercepted from TwhOsnit secure gateway." />
+              <MetadataLine text="Data parsing complete. 2048-bit decryption verified." />
+              <div className="flex flex-wrap gap-x-8">
+                <MetadataLine text={`LATENCY: 0.${Math.floor(Math.random() * 900) + 100}s`} />
+                <MetadataLine text="CONFIDENCE SCORE: 98.9%" />
               </div>
+              <MetadataLine text={`Parsing address cluster... Match found (${records.length})`} />
+              <MetadataLine text="RENDERING OUTPUT..." highlight />
             </div>
           </div>
 
-          <div className="text-center py-4 space-y-2">
-            <p className="text-[10px] font-black text-primary/20 uppercase tracking-[0.5em] animate-pulse">SYSTEM TRACE SECURED</p>
-            <p className="text-primary/60 font-black text-xs tracking-widest mt-2">
+          <div className="text-center pt-12 pb-6">
+            <p className="text-primary/80 font-black text-sm md:text-base tracking-[0.2em] uppercase filter drop-shadow-[0_0_8px_rgba(34,197,94,0.5)]">
               💝 Made with ♡ by Technical White Hat 💝
             </p>
           </div>
@@ -198,53 +179,51 @@ export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoa
   );
 }
 
-function DataField({ 
-  icon: Icon, 
-  label, 
-  value, 
-  highlight = false, 
-  isLockable = false,
-  isAddress = false
-}: { 
-  icon: any, 
-  label: string, 
-  value?: string | number, 
-  highlight?: boolean,
-  isLockable?: boolean,
-  isAddress?: boolean
-}) {
+function ReportLine({ icon, label, value, highlight = false, isAddress = false }: { icon: string, label: string, value?: any, highlight?: boolean, isAddress?: boolean }) {
   const displayValue = value ? String(value) : "N/A";
   const isEmpty = !value || displayValue === "N/A" || displayValue === "---";
 
   return (
-    <div className={cn(
-      "flex flex-col gap-1.5 p-2 rounded transition-colors border border-transparent hover:border-primary/10 hover:bg-primary/5",
-      isAddress && "md:flex-row md:items-start md:gap-4"
-    )}>
-      <div className="flex items-center gap-2 min-w-[120px]">
-        <Icon className={cn("w-3.5 h-3.5", isEmpty ? "text-primary/20" : "text-primary/50")} />
-        <span className="text-[9px] font-black text-primary/40 uppercase tracking-widest">{label}</span>
+    <div className="flex flex-col md:flex-row md:items-start gap-1 md:gap-4 group">
+      <div className="flex items-center gap-3 min-w-[160px]">
+        <span className="text-xl grayscale group-hover:grayscale-0 transition-all flex-shrink-0">{icon}</span>
+        <span className="text-primary font-black uppercase tracking-tight text-sm md:text-base whitespace-nowrap">
+          {label}:
+        </span>
       </div>
-      <div className="flex items-center gap-2 flex-1">
-        {isEmpty && isLockable && <Lock className="w-3 h-3 text-red-500/40" />}
+      <div className="flex items-start gap-2 flex-1 min-w-0">
         <span className={cn(
-          "font-mono text-xs md:text-sm tracking-tight break-all",
-          highlight ? "text-primary font-black text-glow" : "text-white/80",
+          "font-mono text-sm md:text-base tracking-wide leading-tight break-words",
+          highlight ? "text-primary font-black bg-primary/20 px-2 rounded-sm border border-primary/30" : "text-white/90",
           isEmpty && "text-white/20 italic"
         )}>
           {displayValue}
         </span>
+        {isAddress && value && !isEmpty && (
+          <a 
+            href={`https://www.google.com/maps?q=${encodeURIComponent(String(value))}`} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-primary/40 hover:text-primary transition-colors p-1 bg-primary/5 rounded flex-shrink-0"
+          >
+            <Globe className="w-5 h-5" />
+          </a>
+        )}
       </div>
-      {isAddress && value && (
-        <a 
-          href={`https://www.google.com/maps?q=${encodeURIComponent(String(value))}`} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="md:self-center p-1.5 rounded hover:bg-primary/20 transition-colors"
-        >
-          <Globe className="w-4 h-4 text-primary" />
-        </a>
-      )}
     </div>
+  );
+}
+
+function MetadataLine({ text, highlight = false }: { text: string, highlight?: boolean }) {
+  const time = new Date().toLocaleTimeString('en-GB', { hour12: false });
+  return (
+    <p className={cn(
+      "text-primary/50 leading-tight flex items-center gap-2 font-mono",
+      highlight && "text-primary font-black animate-pulse bg-primary/10 w-fit px-1"
+    )}>
+      <span className="opacity-30">[{time}]</span>
+      <ChevronRight className="w-3 h-3 opacity-30" />
+      <span className="tracking-wide">{">"} {text}</span>
+    </p>
   );
 }
