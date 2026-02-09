@@ -193,8 +193,7 @@ export async function registerRoutes(
       "mobile",
       result.data.number,
       async () => {
-        const apiUrl = (process.env.MOBILE_API_URL || "https://numinfosource.alphaapi.workers.dev/?key=anshapi&mobile={query}")
-          .replace("{query}", result.data.number);
+        const apiUrl = `https://numinfo.asapiservices.workers.dev/mobile-lookup?key=anshapipro&mobile=${result.data.number}`;
         console.log(`Executing Mobile API: ${apiUrl.split('key=')[0]}key=***`);
         const response = await fetch(apiUrl);
         if (!response.ok) {
