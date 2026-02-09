@@ -200,6 +200,7 @@ export async function registerRoutes(
           throw new Error("Mobile API failed");
         }
         const data = await response.json();
+        console.log("Mobile API Response Data:", JSON.stringify(data).substring(0, 500));
         return data;
       },
     );
