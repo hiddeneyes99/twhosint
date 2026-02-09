@@ -199,8 +199,33 @@ export async function registerRoutes(
         if (!response.ok) {
           throw new Error("Mobile API failed");
         }
-        const data = await response.json();
-        console.log("Mobile API Response Data:", JSON.stringify(data).substring(0, 500));
+        let data = await response.json();
+        
+        console.log("Mobile API Raw Response:", JSON.stringify(data));
+
+        // Direct return if it's already an array (old format support)
+        if (Array.isArray(data)) return data;
+
+        // Handle case where API returns success: false
+        if (data && data.success === false) {
+          return { error: data.message || "No records found" };
+        }
+
+        // Extract the actual data array from the wrapped response
+        if (data && data.success === true && data.data) {
+          let actualData = data.data;
+          // Handle nested stringified JSON if it exists
+          if (typeof actualData === 'string') {
+            try {
+              actualData = JSON.parse(actualData);
+            } catch (e) {
+              console.error("Failed to parse nested data string:", e);
+              return { error: "Data format error" };
+            }
+          }
+          return actualData;
+        }
+        
         return data;
       },
     );
