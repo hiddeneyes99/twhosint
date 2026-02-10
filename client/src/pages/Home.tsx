@@ -170,8 +170,8 @@ export default function Home() {
               </div>
               <div className="flex flex-col gap-2">
                 <span className="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">System</span>
+                <Link href="/updates" className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors uppercase">Updates & News</Link>
                 <span className="text-xs font-mono text-muted-foreground uppercase">Status: Online</span>
-                <span className="text-xs font-mono text-muted-foreground uppercase">Latency: 12ms</span>
               </div>
             </div>
           </div>

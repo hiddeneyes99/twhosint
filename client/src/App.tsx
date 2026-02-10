@@ -9,6 +9,7 @@ import Dashboard from "@/pages/Dashboard";
 import AdminLogin from "@/pages/AdminLogin";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
+import Updates from "@/pages/Updates";
 import { MatrixBackground } from "@/components/MatrixBackground";
 
 function Router() {
@@ -16,6 +17,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/updates" component={Updates} />
       <Route path="/secret" component={AdminLogin} />
       <Route path="/admin" component={AdminLogin} />
       <Route path="/privacy" component={PrivacyPolicy} />

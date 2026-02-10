@@ -1,0 +1,41 @@
+I need you to create a new page for my application called "Updates & Announcements". This page will serve as the official news feed for TWH OSINT.
+
+Please perform the following tasks:
+
+Create a New Page (client/src/pages/Updates.tsx):
+
+Build a new React component that displays system updates.
+
+Design: Use the existing Cyber/Hacker/Matrix aesthetic (green text, black background, terminal style borders) so it fits perfectly with the rest of the site. Use components like Card or custom div containers with borders.
+
+Content Requirements (Must include these sections):
+
+✅ API Status: Announce that the Mobile Number Search API is fully fixed. Explain that we had to delete the old History Database to fix a bug where "Error/No Data" responses were getting cached/stuck. This reset ensures everyone now gets fresh, accurate data.
+
+💰 Credit System Changes:
+
+New Signup Bonus is now 5 Credits (previously 10).
+
+Mobile Search Cost: Increasing from 1 Credit to 2 Credits starting February 13th.
+
+Other Services: IP and Vehicle search costs remain the same for now. Any future changes will be announced here in advance.
+
+Aadhar Search: Currently CLOSED/Offline because TWH does not have the funds to run it right now.
+
+🛡️ Security & Free Access: Warn that fake accounts will be BANNED. Remind users they can use the "Redeem Code" system to get free credits if they cannot pay.
+
+💡 Transparency (The Cost): Explain clearly: "Every single search costs TWH ₹2.5! Plus we pay for hosting, API servers, and maintenance. Paid credits keep this tool alive, but free options are available for genuine users."
+
+🤝 Business & Services: Add a note at the bottom: "Want to build a website like this or purchase APIs? Contact us on Telegram: @Twhosint"
+
+Navigation:
+
+Do NOT add any action buttons (like "Buy" or "Login") on this page; just display the text information clearly.
+
+Add a small, simple link titled "Updates & News" to the Footer of the website (or bottom of the Navbar/Sidebar) so users can access this page.
+
+Routing:
+
+Register the new route /updates in client/src/App.tsx.
+
+Please generate the code for the new page and the updates to the routing and navigation.
