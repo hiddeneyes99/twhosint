@@ -195,50 +195,64 @@ export async function registerRoutes(
       async () => {
         const apiUrl = `https://numinfo.asapiservices.workers.dev/mobile-lookup?key=anshapipro&mobile=${result.data.number}`;
         console.log(`Executing Mobile API: ${apiUrl.split('key=')[0]}key=***`);
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          throw new Error("Mobile API failed");
-        }
-        let data = await response.json();
         
-        console.log("Mobile API Raw Response:", JSON.stringify(data));
-
-        // The API returns { status: "success", results: [...] }
-        if (data && data.status === "success" && Array.isArray(data.results)) {
-          return data.results.map((item: any) => ({
-            ...item,
-            father_name: item.fname,
-            id_number: item.id
-          }));
-        }
-
-        // Support for other formats just in case
-        if (data && data.success === true && data.data) {
-          let actualData = data.data;
-          if (typeof actualData === 'string') {
-            try {
-              actualData = JSON.parse(actualData);
-            } catch (e) {
-              console.error("Failed to parse nested data string:", e);
-            }
+        try {
+          const response = await fetch(apiUrl);
+          if (!response.ok) {
+            throw new Error(`Mobile API failed with status: ${response.status}`);
           }
-          if (Array.isArray(actualData)) {
-            return actualData.map((item: any) => ({
+          
+          const data = await response.json();
+          console.log("Mobile API Raw Response:", JSON.stringify(data));
+
+          // The API returns { status: "success", results: [...] }
+          if (data && data.status === "success" && Array.isArray(data.results)) {
+            return data.results.map((item: any) => ({
               ...item,
-              father_name: item.father_name || item.fname,
-              id_number: item.id_number || item.id
+              father_name: item.fname || "",
+              id_number: item.id || ""
             }));
           }
-          return actualData;
-        }
 
-        if (Array.isArray(data)) return data;
+          // Support for success: true and results: [...]
+          if (data && data.success === true && Array.isArray(data.results)) {
+            return data.results.map((item: any) => ({
+              ...item,
+              father_name: item.fname || "",
+              id_number: item.id || ""
+            }));
+          }
 
-        if (data && (data.success === false || data.status === "error")) {
-          return { error: data.message || "No records found" };
+          // Support for success: true and data: [...]
+          if (data && data.success === true && data.data) {
+            let actualData = data.data;
+            if (typeof actualData === 'string') {
+              try {
+                actualData = JSON.parse(actualData);
+              } catch (e) {
+                console.error("Failed to parse nested data string:", e);
+              }
+            }
+            if (Array.isArray(actualData)) {
+              return actualData.map((item: any) => ({
+                ...item,
+                father_name: item.father_name || item.fname || "",
+                id_number: item.id_number || item.id || ""
+              }));
+            }
+          }
+
+          if (Array.isArray(data)) return data;
+
+          if (data && (data.success === false || data.status === "error")) {
+            return { error: data.message || "No records found" };
+          }
+          
+          return { error: "Unexpected response format" };
+        } catch (error) {
+          console.error("Mobile API Error:", error);
+          throw error;
         }
-        
-        return data;
       },
     );
   });
