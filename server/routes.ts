@@ -211,19 +211,33 @@ export async function registerRoutes(
           return { error: data.message || "No records found" };
         }
 
-        // Extract the actual data array from the wrapped response
-        if (data && data.success === true && data.data) {
-          let actualData = data.data;
-          // Handle nested stringified JSON if it exists
-          if (typeof actualData === 'string') {
+        // New format mapping (fname -> father_name, id -> id_number)
+        if (data && (data.status === "success" || data.success === true)) {
+          const results = data.results || data.data;
+          
+          if (Array.isArray(results)) {
+            return results.map((item: any) => ({
+              ...item,
+              father_name: item.father_name || item.fname,
+              id_number: item.id_number || item.id
+            }));
+          }
+
+          // Handle nested stringified JSON in data.data
+          if (typeof results === 'string') {
             try {
-              actualData = JSON.parse(actualData);
+              const parsed = JSON.parse(results);
+              if (Array.isArray(parsed)) {
+                return parsed.map((item: any) => ({
+                  ...item,
+                  father_name: item.father_name || item.fname,
+                  id_number: item.id_number || item.id
+                }));
+              }
             } catch (e) {
-              console.error("Failed to parse nested data string:", e);
-              return { error: "Data format error" };
+              console.error("Failed to parse nested results string:", e);
             }
           }
-          return actualData;
         }
         
         return data;
