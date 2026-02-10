@@ -205,26 +205,14 @@ export async function registerRoutes(
           const data = await response.json();
           console.log("Mobile API Raw Response:", JSON.stringify(data));
 
-          // The API returns { status: "success", results: [...] }
+          // Normalize API response to a single array of results
+          let results: any[] = [];
+
           if (data && data.status === "success" && Array.isArray(data.results)) {
-            return data.results.map((item: any) => ({
-              ...item,
-              father_name: item.fname || "",
-              id_number: item.id || ""
-            }));
-          }
-
-          // Support for success: true and results: [...]
-          if (data && data.success === true && Array.isArray(data.results)) {
-            return data.results.map((item: any) => ({
-              ...item,
-              father_name: item.fname || "",
-              id_number: item.id || ""
-            }));
-          }
-
-          // Support for success: true and data: [...]
-          if (data && data.success === true && data.data) {
+            results = data.results;
+          } else if (data && data.success === true && Array.isArray(data.results)) {
+            results = data.results;
+          } else if (data && data.success === true && data.data) {
             let actualData = data.data;
             if (typeof actualData === 'string') {
               try {
@@ -234,21 +222,29 @@ export async function registerRoutes(
               }
             }
             if (Array.isArray(actualData)) {
-              return actualData.map((item: any) => ({
-                ...item,
-                father_name: item.father_name || item.fname || "",
-                id_number: item.id_number || item.id || ""
-              }));
+              results = actualData;
             }
+          } else if (Array.isArray(data)) {
+            results = data;
           }
 
-          if (Array.isArray(data)) return data;
+          // If we have results, map the fields and return
+          if (results.length > 0) {
+            const mappedResults = results.map((item: any) => ({
+              ...item,
+              father_name: item.fname || item.father_name || "",
+              id_number: item.id || item.id_number || ""
+            }));
+            return mappedResults;
+          }
 
+          // Handle error/no-record cases
           if (data && (data.success === false || data.status === "error")) {
             return { error: data.message || "No records found" };
           }
           
-          return { error: "Unexpected response format" };
+          // If no results array found but didn't explicitly error, it might be an empty result
+          return { error: "No records found" };
         } catch (error) {
           console.error("Mobile API Error:", error);
           throw error;
