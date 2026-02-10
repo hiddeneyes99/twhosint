@@ -203,41 +203,39 @@ export async function registerRoutes(
         
         console.log("Mobile API Raw Response:", JSON.stringify(data));
 
-        // Direct return if it's already an array (old format support)
-        if (Array.isArray(data)) return data;
-
-        // Handle case where API returns success: false
-        if (data && data.success === false) {
-          return { error: data.message || "No records found" };
+        // The API returns { status: "success", results: [...] }
+        if (data && data.status === "success" && Array.isArray(data.results)) {
+          return data.results.map((item: any) => ({
+            ...item,
+            father_name: item.fname,
+            id_number: item.id
+          }));
         }
 
-        // New format mapping (fname -> father_name, id -> id_number)
-        if (data && (data.status === "success" || data.success === true)) {
-          const results = data.results || data.data;
-          
-          if (Array.isArray(results)) {
-            return results.map((item: any) => ({
+        // Support for other formats just in case
+        if (data && data.success === true && data.data) {
+          let actualData = data.data;
+          if (typeof actualData === 'string') {
+            try {
+              actualData = JSON.parse(actualData);
+            } catch (e) {
+              console.error("Failed to parse nested data string:", e);
+            }
+          }
+          if (Array.isArray(actualData)) {
+            return actualData.map((item: any) => ({
               ...item,
               father_name: item.father_name || item.fname,
               id_number: item.id_number || item.id
             }));
           }
+          return actualData;
+        }
 
-          // Handle nested stringified JSON in data.data
-          if (typeof results === 'string') {
-            try {
-              const parsed = JSON.parse(results);
-              if (Array.isArray(parsed)) {
-                return parsed.map((item: any) => ({
-                  ...item,
-                  father_name: item.father_name || item.fname,
-                  id_number: item.id_number || item.id
-                }));
-              }
-            } catch (e) {
-              console.error("Failed to parse nested results string:", e);
-            }
-          }
+        if (Array.isArray(data)) return data;
+
+        if (data && (data.success === false || data.status === "error")) {
+          return { error: data.message || "No records found" };
         }
         
         return data;
