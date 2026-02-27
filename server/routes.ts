@@ -221,13 +221,26 @@ export async function registerRoutes(
                 console.error("Failed to parse nested data string:", e);
               }
             }
+            
             if (Array.isArray(actualData)) {
               results = actualData;
+            } else if (actualData && typeof actualData === 'object') {
+              // Handle data.data.result if it exists (seen in logs)
+              if (Array.isArray(actualData.result)) {
+                results = actualData.result;
+              } else {
+                // Check if actualData itself is the record
+                const mobileFields = ['name', 'mobile', 'address', 'father_name', 'id_number', 'circle', 'fname', 'id'];
+                const matchCount = mobileFields.filter(field => field in actualData).length;
+                if (matchCount >= 2) {
+                  results = [actualData];
+                }
+              }
             }
           } else if (Array.isArray(data)) {
             results = data;
           } else if (data && typeof data === 'object' && !Array.isArray(data)) {
-            // New API format might return a single object
+            // New API format might return a single object at root
             const mobileFields = ['name', 'mobile', 'address', 'father_name', 'id_number', 'circle', 'fname', 'id'];
             const matchCount = mobileFields.filter(field => field in data).length;
             if (matchCount >= 2) {
