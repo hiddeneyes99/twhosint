@@ -193,7 +193,7 @@ export async function registerRoutes(
       "mobile",
       result.data.number,
       async () => {
-        const apiUrl = `https://numinfo.asapiservices.workers.dev/mobile-lookup?key=anshapipro&mobile=${result.data.number}`;
+        const apiUrl = `http://103.160.107.155:10000/mobile-lookup?key=ansh_culex_6153462997_bb994e332955777f&mobile=${result.data.number}`;
         console.log(`Executing Mobile API: ${apiUrl.split('key=')[0]}key=***`);
         
         try {
@@ -226,6 +226,13 @@ export async function registerRoutes(
             }
           } else if (Array.isArray(data)) {
             results = data;
+          } else if (data && typeof data === 'object' && !Array.isArray(data)) {
+            // New API format might return a single object
+            const mobileFields = ['name', 'mobile', 'address', 'father_name', 'id_number', 'circle', 'fname', 'id'];
+            const matchCount = mobileFields.filter(field => field in data).length;
+            if (matchCount >= 2) {
+              results = [data];
+            }
           }
 
           // If we have results, map the fields and return

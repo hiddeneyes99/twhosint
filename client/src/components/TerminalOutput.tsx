@@ -35,7 +35,7 @@ export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoa
     if (data.data && Array.isArray(data.data)) return 'mobile';
     if (Array.isArray(data) && data.length > 0 && (data[0].mobile || data[0].name)) return 'mobile';
     
-    const mobileFields = ['name', 'mobile', 'address', 'father_name', 'id_number', 'circle'];
+    const mobileFields = ['name', 'mobile', 'address', 'father_name', 'id_number', 'circle', 'fname', 'id'];
     const matchCount = mobileFields.filter(field => field in data).length;
     if (matchCount >= 2) return 'mobile';
     
@@ -51,7 +51,7 @@ export function TerminalOutput({ data, title = "OUTPUT STREAM", className, isLoa
     if (data.data && Array.isArray(data.data)) return data.data;
     if (data.records && Array.isArray(data.records)) return data.records;
     
-    const mobileFieldIndicators = ['name', 'mobile', 'address', 'father_name', 'id_number', 'circle'];
+    const mobileFieldIndicators = ['name', 'mobile', 'address', 'father_name', 'id_number', 'circle', 'fname', 'id'];
     const matchCount = mobileFieldIndicators.filter(field => field in data).length;
     if (matchCount >= 2) return [data];
     
