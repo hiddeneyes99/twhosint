@@ -60,3 +60,4 @@
     - Each data type now shows formatted fields instead of "NO DIRECT DATA FRAGMENTS LOCATED"
 [x] 36. Re-installed npm dependencies and verified application running on port 5000 after environment migration (2026-01-31)
 [x] 37. Re-installed npm dependencies and verified application running on port 5000 after environment migration (2026-02-09)
+[x] 38. Re-installed tsx and npm dependencies, restarted workflow, verified application running on port 5000 after environment migration (2026-02-27)
