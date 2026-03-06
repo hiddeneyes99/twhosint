@@ -193,7 +193,7 @@ export async function registerRoutes(
       "mobile",
       result.data.number,
       async () => {
-        const apiUrl = `http://103.160.107.155:10000/mobile-lookup?key=ansh_culex_6153462997_bb994e332955777f&mobile=${result.data.number}`;
+        const apiUrl = `http://77.90.43.194:10000/api/mobile?key=ansh_rishu_5738579437_25f8fd8fcb8596d3&mobile=${result.data.number}`;
         console.log(`Executing Mobile API: ${apiUrl.split('key=')[0]}key=***`);
         
         try {

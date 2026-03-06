@@ -62,3 +62,4 @@
 [x] 37. Re-installed npm dependencies and verified application running on port 5000 after environment migration (2026-02-09)
 [x] 38. Re-installed tsx and npm dependencies, restarted workflow, verified application running on port 5000 after environment migration (2026-02-27)
 [x] 39. Re-installed npm dependencies, restarted workflow, verified application running on port 5000 after environment migration (2026-03-06)
+[x] 40. Updated Mobile Info API to new endpoint (77.90.43.194) and updated .replit env vars
