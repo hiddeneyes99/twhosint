@@ -1,0 +1,329 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KInitializing Firebase Admin with Project ID only (default credentials)
+11:06:43 PM [express] serving on port 5000
+Database connected successfully at: [35m2026-03-15T23:06:44.223Z[39m
+11:06:49 PM [express] GET /api/broadcast/active 200 in 227ms
+11:06:59 PM [express] GET /api/auth/user 401 in 0ms :: {"message":"Unauthorized"}
+Successfully verified token for: test@gmail.com
+11:09:39 PM [express] GET /api/broadcast/active 304 in 1534ms
+11:09:40 PM [express] GET /api/auth/user 200 in 2105ms :: {"id":"OZrA80oCuFaIG3kKfeupvjn2RLU2","email":"test@gmail.com","firstName":null,"lastName":null,"profileImageUrl":null,"username":"test","role":"user","isBlocked":false,"lastIp":"45.117.205.158, 10.83.12.119, 127.0.0.1","isIpBlocked":false,"termsAccepted":false,"privacyAccepted":false,"credits":74,"createdAt":"2026-01-17T11:04:29.195Z","updatedAt":"2026-03-15T23:09:40.338Z"}
+Successfully verified token for: test@gmail.com
+Successfully verified token for: test@gmail.com
+11:09:43 PM [express] GET /api/auth/user 200 in 659ms :: {"id":"OZrA80oCuFaIG3kKfeupvjn2RLU2","email":"test@gmail.com","firstName":null,"lastName":null,"profileImageUrl":null,"username":"test","role":"user","isBlocked":false,"lastIp":"45.117.205.158, 10.83.5.199, 127.0.0.1","isIpBlocked":false,"termsAccepted":false,"privacyAccepted":false,"credits":74,"createdAt":"2026-01-17T11:04:29.195Z","updatedAt":"2026-03-15T23:09:43.012Z"}
+11:09:43 PM [express] GET /api/user/history 200 in 682ms :: {"data":[{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 1 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 2 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+11:10:14 PM [express] GET /api/broadcast/active 304 in 1696ms
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 3 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 4 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 5 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 6 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 7 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 8 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 9 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 10 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+11:11:43 PM [express] POST /api/services/mobile 500 in 115294ms :: {"message":"fetch failed","attempts":10}

@@ -1,0 +1,70 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KInitializing Firebase Admin with Project ID only (default credentials)
+11:27:26 PM [express] serving on port 5000
+Database connected successfully at: [35m2026-03-15T23:27:27.783Z[39m
+Successfully verified token for: test@gmail.com
+11:27:30 PM [express] GET /api/user/history 200 in 1537ms :: {"data":[{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+11:27:35 PM [express] GET /api/broadcast/active 200 in 223ms
+Successfully verified token for: test@gmail.com
+11:27:36 PM [express] GET /api/auth/user 200 in 657ms :: {"id":"OZrA80oCuFaIG3kKfeupvjn2RLU2","email":"test@gmail.com","firstName":null,"lastName":null,"profileImageUrl":null,"username":"test","role":"user","isBlocked":false,"lastIp":"45.117.205.158, 10.83.3.169, 127.0.0.1","isIpBlocked":false,"termsAccepted":false,"privacyAccepted":false,"credits":74,"createdAt":"2026-01-17T11:04:29.195Z","updatedAt":"2026-03-15T23:27:36.375Z"}
+Successfully verified token for: test@gmail.com
+Successfully verified token for: test@gmail.com
+11:27:39 PM [express] GET /api/auth/user 200 in 658ms :: {"id":"OZrA80oCuFaIG3kKfeupvjn2RLU2","email":"test@gmail.com","firstName":null,"lastName":null,"profileImageUrl":null,"username":"test","role":"user","isBlocked":false,"lastIp":"45.117.205.158, 10.83.3.169, 127.0.0.1","isIpBlocked":false,"termsAccepted":false,"privacyAccepted":false,"credits":74,"createdAt":"2026-01-17T11:04:29.195Z","updatedAt":"2026-03-15T23:27:38.856Z"}
+11:27:40 PM [express] GET /api/user/history 304 in 1973ms :: {"data":[{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+Service Error: error: invalid input syntax for type bigint: "Wb06aa8465"
+    at [90m/home/runner/workspace/[39mnode_modules/[4mpg-pool[24m/index.js:45:11
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mnode_modules/[4msrc[24m/node-postgres/session.ts:104:19[90m)[39m
+    at async DatabaseStorage.isNumberProtected [90m(/home/runner/workspace/[39mserver/storage.ts:177:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:46:32[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:314:5[90m)[39m {
+  length: [33m152[39m,
+  severity: [32m'ERROR'[39m,
+  code: [32m'22P02'[39m,
+  detail: [90mundefined[39m,
+  hint: [90mundefined[39m,
+  position: [90mundefined[39m,
+  internalPosition: [90mundefined[39m,
+  internalQuery: [90mundefined[39m,
+  where: [32m"unnamed portal parameter $1 = '...'"[39m,
+  schema: [90mundefined[39m,
+  table: [90mundefined[39m,
+  column: [90mundefined[39m,
+  dataType: [90mundefined[39m,
+  constraint: [90mundefined[39m,
+  file: [32m'numutils.c'[39m,
+  line: [32m'878'[39m,
+  routine: [32m'pg_strtoint64_safe'[39m
+}
+11:27:48 PM [express] POST /api/services/vehicle 500 in 1110ms :: {"message":"Internal server error"}
+Successfully verified token for: test@gmail.com
+Service Error: error: invalid input syntax for type bigint: "45.117.205.158"
+    at [90m/home/runner/workspace/[39mnode_modules/[4mpg-pool[24m/index.js:45:11
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mnode_modules/[4msrc[24m/node-postgres/session.ts:104:19[90m)[39m
+    at async DatabaseStorage.isNumberProtected [90m(/home/runner/workspace/[39mserver/storage.ts:177:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:46:32[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:341:5[90m)[39m {
+  length: [33m156[39m,
+  severity: [32m'ERROR'[39m,
+  code: [32m'22P02'[39m,
+  detail: [90mundefined[39m,
+  hint: [90mundefined[39m,
+  position: [90mundefined[39m,
+  internalPosition: [90mundefined[39m,
+  internalQuery: [90mundefined[39m,
+  where: [32m"unnamed portal parameter $1 = '...'"[39m,
+  schema: [90mundefined[39m,
+  table: [90mundefined[39m,
+  column: [90mundefined[39m,
+  dataType: [90mundefined[39m,
+  constraint: [90mundefined[39m,
+  file: [32m'numutils.c'[39m,
+  line: [32m'878'[39m,
+  routine: [32m'pg_strtoint64_safe'[39m
+}
+11:27:59 PM [express] POST /api/services/ip 500 in 2484ms :: {"message":"Internal server error"}

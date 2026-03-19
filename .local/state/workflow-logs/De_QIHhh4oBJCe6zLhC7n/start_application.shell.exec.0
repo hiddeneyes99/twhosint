@@ -1,0 +1,377 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KInitializing Firebase Admin with Project ID only (default credentials)
+11:29:20 PM [express] serving on port 5000
+Database connected successfully at: [35m2026-03-15T23:29:21.077Z[39m
+11:29:30 PM [express] GET /api/broadcast/active 200 in 240ms
+Successfully verified token for: test@gmail.com
+11:30:04 PM [express] GET /api/broadcast/active 304 in 1616ms
+11:30:05 PM [express] GET /api/auth/user 200 in 2104ms :: {"id":"OZrA80oCuFaIG3kKfeupvjn2RLU2","email":"test@gmail.com","firstName":null,"lastName":null,"profileImageUrl":null,"username":"test","role":"user","isBlocked":false,"lastIp":"45.117.205.158, 10.83.3.169, 127.0.0.1","isIpBlocked":false,"termsAccepted":false,"privacyAccepted":false,"credits":74,"createdAt":"2026-01-17T11:04:29.195Z","updatedAt":"2026-03-15T23:30:04.954Z"}
+Successfully verified token for: test@gmail.com
+Successfully verified token for: test@gmail.com
+11:30:07 PM [express] GET /api/auth/user 200 in 666ms :: {"id":"OZrA80oCuFaIG3kKfeupvjn2RLU2","email":"test@gmail.com","firstName":null,"lastName":null,"profileImageUrl":null,"username":"test","role":"user","isBlocked":false,"lastIp":"45.117.205.158, 10.83.2.192, 127.0.0.1","isIpBlocked":false,"termsAccepted":false,"privacyAccepted":false,"credits":74,"createdAt":"2026-01-17T11:04:29.195Z","updatedAt":"2026-03-15T23:30:06.973Z"}
+11:30:07 PM [express] GET /api/user/history 304 in 691ms :: {"data":[{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+11:30:20 PM [express] POST /api/services/vehicle 200 in 4121ms :: {"success":true,"data":{"credit":"API DEVELOPER : @Blackeyes_0","details":{"Address":"NA","City Name":"Kolkata Ruby","Father's Name":null,"Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Fitness Upto":"23-Apr-2039","Fuel Norms":"BHARAT STAGE VI","Fuel Type":"PETROL","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Insurance Expiry":"16-Apr-2029","Insurance No":null,"Insurance Upto":"16-Apr-2029","Maker Model":"BURGMAN STREET RC","Model Name":"SUZUKI","Owner Name":"MD A*****R","Owner Serial No":null,"PUC No":null,"PUC Upto":"11-Sep-2026","Phone":"+91-","Registered RTO":"KASBA ARTO, West Bengal","Registration Date":"24-Apr-2024","Tax Upto":"LTT","Vehicle Class":"M-CYCLE/SCOOTER"},"rc_number":"WB06AA8465","status":"success"},"creditsRemaining":73}
+Successfully verified token for: test@gmail.com
+11:30:21 PM [express] GET /api/user/history 200 in 652ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+11:30:22 PM [express] GET /api/user/history 304 in 651ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+11:30:23 PM [express] GET /api/user/history 304 in 651ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+11:30:24 PM [express] GET /api/user/history 304 in 650ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+11:30:25 PM [express] GET /api/user/history 304 in 651ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+11:30:26 PM [express] GET /api/user/history 304 in 651ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+11:30:27 PM [express] GET /api/user/history 304 in 651ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+11:30:28 PM [express] GET /api/user/history 304 in 650ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+11:30:28 PM [express] GET /api/user/history 304 in 650ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+Successfully verified token for: test@gmail.com
+11:30:33 PM [express] GET /api/auth/user 200 in 650ms :: {"id":"OZrA80oCuFaIG3kKfeupvjn2RLU2","email":"test@gmail.com","firstName":null,"lastName":null,"profileImageUrl":null,"username":"test","role":"user","isBlocked":false,"lastIp":"45.117.205.158, 10.83.6.141, 127.0.0.1","isIpBlocked":false,"termsAccepted":false,"privacyAccepted":false,"credits":73,"createdAt":"2026-01-17T11:04:29.195Z","updatedAt":"2026-03-15T23:30:32.766Z"}
+11:30:34 PM [express] GET /api/broadcast/active 304 in 1554ms
+11:30:34 PM [express] GET /api/user/history 200 in 2011ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+11:30:41 PM [express] POST /api/services/ip 200 in 3533ms :: {"success":true,"data":{"status":"success","continent":"Asia","continentCode":"AS","country":"India","countryCode":"IN","region":"WB","regionName":"West Bengal","city":"Kolkata","district":"","zip":"700020","lat":22.5643,"lon":88.3693,"timezone":"Asia/Kolkata","offset":19800,"currency":"INR","isp":"Indinet Service Private Limited","org":"Indinet Service Private Limited","as":"AS132115 INDINET SERVICE PRIVATE LIMITED","asname":"ISPL-AS-AP","reverse":"dynamic-158.205.117.45.indinet.co.in","mobile":false,"proxy":false,"hosting":false,"query":"45.117.205.158"},"creditsRemaining":72}
+Successfully verified token for: test@gmail.com
+11:30:42 PM [express] GET /api/user/history 200 in 674ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"ip","query":"45.117.205.158","status":"SUCCESS","result":{"as":"AS132115 INDINET SERVICE PRIVATE LIMITED","isp":"Indinet Service Private Limited","lat":22.5643,"lon":88.3693,"org":"Indinet Service Private Limited","zip":"700020","city":"Kolkata","proxy":false,"query":"45.117.205.158","asname":"ISPL-AS-AP","mobile":false,"offset":19800,"region":"WB","status":"success","country":"India","hosting":false,"reverse":"dynamic-158.205.117.45.indinet.co.in","currency":"INR","district":"","timezone":"Asia/Kolkata","continent":"Asia","regionName":"West Bengal","countryCode":"IN","continentCode":"AS"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+11:30:43 PM [express] GET /api/user/history 304 in 672ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"ip","query":"45.117.205.158","status":"SUCCESS","result":{"as":"AS132115 INDINET SERVICE PRIVATE LIMITED","isp":"Indinet Service Private Limited","lat":22.5643,"lon":88.3693,"org":"Indinet Service Private Limited","zip":"700020","city":"Kolkata","proxy":false,"query":"45.117.205.158","asname":"ISPL-AS-AP","mobile":false,"offset":19800,"region":"WB","status":"success","country":"India","hosting":false,"reverse":"dynamic-158.205.117.45.indinet.co.in","currency":"INR","district":"","timezone":"Asia/Kolkata","continent":"Asia","regionName":"West Bengal","countryCode":"IN","continentCode":"AS"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+11:30:44 PM [express] GET /api/user/history 304 in 674ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"ip","query":"45.117.205.158","status":"SUCCESS","result":{"as":"AS132115 INDINET SERVICE PRIVATE LIMITED","isp":"Indinet Service Private Limited","lat":22.5643,"lon":88.3693,"org":"Indinet Service Private Limited","zip":"700020","city":"Kolkata","proxy":false,"query":"45.117.205.158","asname":"ISPL-AS-AP","mobile":false,"offset":19800,"region":"WB","status":"success","country":"India","hosting":false,"reverse":"dynamic-158.205.117.45.indinet.co.in","currency":"INR","district":"","timezone":"Asia/Kolkata","continent":"Asia","regionName":"West Bengal","countryCode":"IN","continentCode":"AS"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+11:30:45 PM [express] GET /api/user/history 304 in 673ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"ip","query":"45.117.205.158","status":"SUCCESS","result":{"as":"AS132115 INDINET SERVICE PRIVATE LIMITED","isp":"Indinet Service Private Limited","lat":22.5643,"lon":88.3693,"org":"Indinet Service Private Limited","zip":"700020","city":"Kolkata","proxy":false,"query":"45.117.205.158","asname":"ISPL-AS-AP","mobile":false,"offset":19800,"region":"WB","status":"success","country":"India","hosting":false,"reverse":"dynamic-158.205.117.45.indinet.co.in","currency":"INR","district":"","timezone":"Asia/Kolkata","continent":"Asia","regionName":"West Bengal","countryCode":"IN","continentCode":"AS"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+11:30:46 PM [express] GET /api/user/history 304 in 672ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"ip","query":"45.117.205.158","status":"SUCCESS","result":{"as":"AS132115 INDINET SERVICE PRIVATE LIMITED","isp":"Indinet Service Private Limited","lat":22.5643,"lon":88.3693,"org":"Indinet Service Private Limited","zip":"700020","city":"Kolkata","proxy":false,"query":"45.117.205.158","asname":"ISPL-AS-AP","mobile":false,"offset":19800,"region":"WB","status":"success","country":"India","hosting":false,"reverse":"dynamic-158.205.117.45.indinet.co.in","currency":"INR","district":"","timezone":"Asia/Kolkata","continent":"Asia","regionName":"West Bengal","countryCode":"IN","continentCode":"AS"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+Successfully verified token for: test@gmail.com
+11:30:50 PM [express] GET /api/user/history 200 in 672ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"ip","query":"45.117.205.158","status":"SUCCESS","result":{"as":"AS132115 INDINET SERVICE PRIVATE LIMITED","isp":"Indinet Service Private Limited","lat":22.5643,"lon":88.3693,"org":"Indinet Service Private Limited","zip":"700020","city":"Kolkata","proxy":false,"query":"45.117.205.158","asname":"ISPL-AS-AP","mobile":false,"offset":19800,"region":"WB","status":"success","country":"India","hosting":false,"reverse":"dynamic-158.205.117.45.indinet.co.in","currency":"INR","district":"","timezone":"Asia/Kolkata","continent":"Asia","regionName":"West Bengal","countryCode":"IN","continentCode":"AS"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+11:30:51 PM [express] GET /api/broadcast/active 304 in 1561ms
+11:30:52 PM [express] GET /api/auth/user 200 in 2009ms :: {"id":"OZrA80oCuFaIG3kKfeupvjn2RLU2","email":"test@gmail.com","firstName":null,"lastName":null,"profileImageUrl":null,"username":"test","role":"user","isBlocked":false,"lastIp":"45.117.205.158, 10.83.3.169, 127.0.0.1","isIpBlocked":false,"termsAccepted":false,"privacyAccepted":false,"credits":72,"createdAt":"2026-01-17T11:04:29.195Z","updatedAt":"2026-03-15T23:30:51.783Z"}
+11:31:23 PM [express] GET /api/broadcast/active 304 in 1615ms
+11:31:55 PM [express] GET /api/broadcast/active 304 in 1576ms
+Successfully verified token for: test@gmail.com
+Successfully verified token for: test@gmail.com
+11:32:06 PM [express] GET /api/auth/user 200 in 676ms :: {"id":"OZrA80oCuFaIG3kKfeupvjn2RLU2","email":"test@gmail.com","firstName":null,"lastName":null,"profileImageUrl":null,"username":"test","role":"user","isBlocked":false,"lastIp":"45.117.205.158, 10.83.0.27, 127.0.0.1","isIpBlocked":false,"termsAccepted":false,"privacyAccepted":false,"credits":72,"createdAt":"2026-01-17T11:04:29.195Z","updatedAt":"2026-03-15T23:32:05.700Z"}
+11:32:07 PM [express] GET /api/broadcast/active 304 in 1551ms
+11:32:07 PM [express] GET /api/user/history 304 in 1972ms :: {"data":[{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"Wb06aa8465","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"+91-","PUC No":null,"Address":"NA","PUC Upto":"11-Sep-2026","Tax Upto":"LTT","City Name":"Kolkata Ruby","Fuel Type":"PETROL","Fuel Norms":"BHARAT STAGE VI","Model Name":"SUZUKI","Owner Name":"MD A*****R","Maker Model":"BURGMAN STREET RC","Fitness Upto":"23-Apr-2039","Insurance No":null,"Father's Name":null,"Vehicle Class":"M-CYCLE/SCOOTER","Financier Name":"TATA CAPITAL FINANCIAL SERVICES LTD","Insurance Upto":"16-Apr-2029","Registered RTO":"KASBA ARTO, West Bengal","Owner Serial No":null,"Insurance Expiry":"16-Apr-2029","Insurance Company":"GO DIGIT GENERAL INSURANCE LTD","Registration Date":"24-Apr-2024"},"rc_number":"WB06AA8465"},"createdAt":null},{"id":null,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"ip","query":"45.117.205.158","status":"SUCCESS","result":{"as":"AS132115 INDINET SERVICE PRIVATE LIMITED","isp":"Indinet Service Private Limited","lat":22.5643,"lon":88.3693,"org":"Indinet Service Private Limited","zip":"700020","city":"Kolkata","proxy":false,"query":"45.117.205.158","asname":"ISPL-AS-AP","mobile":false,"offset":19800,"region":"WB","status":"success","country":"India","hosting":false,"reverse":"dynamic-158.205.117.45.indinet.co.in","currency":"INR","district":"","timezone":"Asia/Kolkata","continent":"Asia","regionName":"West Bengal","countryCode":"IN","continentCode":"AS"},"createdAt":null},{"id":"1398","userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+Successfully verified token for: test@gmail.com
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 1 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 2 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+11:32:39 PM [express] GET /api/broadcast/active 304 in 1607ms
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 3 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 4 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 5 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+11:33:10 PM [express] GET /api/broadcast/active 304 in 1589ms
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 6 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 7 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 8 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 9 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Executing Mobile API: http://103.160.107.155:10000/mobile-lookup?key=***
+Mobile API Error: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}
+Attempt 10 exception for mobile: TypeError: fetch failed
+[90m    at node:internal/deps/undici/undici:14902:13[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:200:28[90m)[39m
+    at async handleServiceRequest [90m(/home/runner/workspace/[39mserver/routes.ts:91:18[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:190:5[90m)[39m {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: 103.160.107.155:10000, timeout: 10000ms)
+  [90m    at onConnectTimeout (node:internal/deps/undici/undici:2718:28)[39m
+  [90m    at Immediate._onImmediate (node:internal/deps/undici/undici:2699:11)[39m
+  [90m    at process.processImmediate (node:internal/timers:483:21)[39m {
+    code: [32m'UND_ERR_CONNECT_TIMEOUT'[39m,
+    [[32mSymbol(undici.error.UND_ERR)[39m]: [33mtrue[39m,
+    [[32mSymbol(undici.error.UND_ERR_CONNECT_TIMEOUT)[39m]: [33mtrue[39m
+  }
+}

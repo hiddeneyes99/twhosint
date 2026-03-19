@@ -1,0 +1,22 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KInitializing Firebase Admin with Project ID only (default credentials)
+1:21:02 PM [express] serving on port 5000
+Database connected successfully at: [35m2026-03-09T13:21:03.996Z[39m
+1:21:12 PM [express] GET /api/broadcast/active 200 in 229ms
+1:21:43 PM [express] GET /api/broadcast/active 304 in 1582ms
+1:22:15 PM [express] GET /api/broadcast/active 304 in 1582ms
+1:22:47 PM [express] GET /api/broadcast/active 304 in 1553ms
+1:25:16 PM [express] GET /api/broadcast/active 304 in 1665ms
+1:25:48 PM [express] GET /api/broadcast/active 304 in 1557ms
+1:26:20 PM [express] GET /api/broadcast/active 304 in 1582ms
+1:26:40 PM [express] GET /api/broadcast/active 200 in 1557ms
+1:27:42 PM [express] GET /api/broadcast/active 304 in 1579ms
+Successfully verified token for: test@gmail.com
+Successfully verified token for: test@gmail.com
+1:27:47 PM [express] GET /api/auth/user 200 in 700ms :: {"id":"OZrA80oCuFaIG3kKfeupvjn2RLU2","email":"test@gmail.com","firstName":null,"lastName":null,"profileImageUrl":null,"username":"test","role":"user","isBlocked":false,"lastIp":"45.117.205.155, 10.83.6.141","isIpBlocked":false,"termsAccepted":false,"privacyAccepted":false,"credits":71,"createdAt":"2026-01-17T11:04:29.195Z","updatedAt":"2026-03-09T13:27:47.120Z"}
+1:27:48 PM [express] GET /api/user/history 200 in 2235ms :: {"data":[{"id":1564,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9748283841","status":"SUCCESS","result":[{"id":520545319177,"name":"Azmeri Khatoon","email":"","circle":"JIO KOLKATA","mobile":"9748283841","address":"D/O Mustak Ahmed 23 B tiljala lane Tiljala 23 b tiljala tiljala Tiljala south 24 parganas West Bengal 700039","id_number":520545319177,"alt_mobile":"6290841477","father_name":"Mustak Ahmed"},{"id":905158792764,"name":"Md Alamgir","email":"","circle":"JIO KOL","mobile":"7003874922","address":"23B Tiljala Lane Tiljala south 24 parganas Kolkata East Kolkatta West Bengal 700039","id_number":905158792764,"alt_mobile":"9748283841","father_name":"Abdul Manan"}],"createdAt":"2026-03-09T12:17:56.809Z"},{"id":1498,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"vehicle","query":"DL14CM2245","status":"SUCCESS","result":{"credit":"API DEVELOPER : @Blackeyes_0","status":"success","details":{"Phone":"NA","PUC No":null,"Address":"NA","PUC Upto":"20-Feb-2027","Tax Upto":"LTT","City Name":"Sonipat due to the NCR","Fuel Type":null,"Fuel Norms":"BHARAT STAGE VI","Model Name":null,"Owner Name":"A****N S******I","Maker Model":"FRONX SIGMA 6AB","Fitness Upto":"20-Feb-2041","Insurance No":null,"Father's Name":null,"Vehicle Class":"MOTOR CAR","Financier Name":"Axis Bank Ltd","Insurance Upto":"18-Feb-2029","Registered RTO":"SURAJMAL VIHAR, Delhi","Owner Serial No":null,"Insurance Expiry":"18-Feb-2029","Insurance Company":"Reliance General Insurance Co. Ltd.","Registration Date":"21-Feb-2026"},"rc_number":"DL14CM2245"},"createdAt":"2026-03-04T18:20:12.242Z"},{"id":1398,"userId":"OZrA80oCuFaIG3kKfeupvjn2RLU2","service":"mobile","query":"9002891472","status":"SUCCESS","result":[{"id":874101502024,"name":"Arun Kumar Bhakta","email":"arunbakta@gmail.com","circle":"JIO KOL","mobile":"9002891472","address":"S/O Chittaranjan Bhakta DAYALCHAK HIGH. SCHOOL DAYALCHAK HIGH SCHOOL Mahadole NA PANASKURA Dayal Chak Panskura-I Purba Medinipur NA West Bengal 721634","id_number":874101502024,"alt_mobile":"9088452794","father_name":"Chittaranjan Bhakta"}],"createdAt":"2026-02-27T21:20:54.439Z"}],"page":1,"limit":10,"hasMore":false}
+1:31:18 PM [express] GET /api/broadcast/active 304 in 1608ms
+1:49:28 PM [express] GET /api/broadcast/active 304 in 1623ms
