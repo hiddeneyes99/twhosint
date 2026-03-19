@@ -193,7 +193,7 @@ export async function registerRoutes(
       "mobile",
       result.data.number,
       async () => {
-        const apiUrl = `http://103.160.107.155:10000/mobile-lookup?key=ansh_culex_6153462997_bb994e332955777f&mobile=${result.data.number}`;
+        const apiUrl = `https://ansh-apis.is-dev.org/api/culex?key=ansh&num=${result.data.number}`;
         console.log(`Executing Mobile API: ${apiUrl.split('key=')[0]}key=***`);
         
         try {
@@ -208,7 +208,9 @@ export async function registerRoutes(
           // Normalize API response to a single array of results
           let results: any[] = [];
 
-          if (data && data.status === "success" && Array.isArray(data.results)) {
+          if (data && data.success === true && Array.isArray(data.result)) {
+            results = data.result;
+          } else if (data && data.status === "success" && Array.isArray(data.results)) {
             results = data.results;
           } else if (data && data.success === true && Array.isArray(data.results)) {
             results = data.results;
